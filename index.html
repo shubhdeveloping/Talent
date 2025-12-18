@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TalentiDO - Start am 25. Dezämber</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <title>TalentiDO - Luxury Christmas Reveal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --purple: #a855f7;
-            --purple-glow: #9333ea;
-            --red: #ef4444;
-            --glass-bg: rgba(20, 20, 25, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            /* Luxury Blue Palette */
+            --midnight: #020617;
+            --sapphire: #1e3a8a;
+            --ice-blue: #dbeafe;
+            --neon-cyan: #06b6d4;
+            --ruby-red: #be123c; /* Deeper, richer red */
+            
+            /* Advanced Material Variables */
+            --glass-bg: rgba(10, 25, 50, 0.65);
+            --crystal-border: linear-gradient(
+                135deg, 
+                rgba(255,255,255,0.6) 0%, 
+                rgba(255,255,255,0.1) 50%, 
+                rgba(6, 182, 212, 0.5) 100%
+            );
         }
 
         * { box-sizing: border-box; }
@@ -20,242 +30,285 @@
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             position: relative;
-            background-color: #050505;
+            background-color: var(--midnight);
+            color: var(--ice-blue);
         }
 
-        /* --- ZURICH BACKGROUND --- */
-        .bg-image {
+        /* --- LAYER 1: CINEMATIC SWISS BACKGROUND --- */
+        .bg-cinematic {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Image of Zurich in Winter/Night */
-            background-image: url('https://images.unsplash.com/photo-1515516089376-88db1e26e9c0?q=80&w=2070&auto=format&fit=crop'); 
+            top: -5%; left: -5%;
+            width: 110%; height: 110%;
+            /* High-res Zurich/Swiss city at Christmas night */
+            background-image: url('https://images.unsplash.com/photo-1605540447171-2661b7562062?q=80&w=2071&auto=format&fit=crop');
             background-size: cover;
-            background-position: center;
+            background-position: center center;
+            z-index: -3;
+            /* Subtle slow zoom effect for dynamism */
+            animation: slowZoom 40s infinite alternate ease-in-out;
+            filter: brightness(0.8);
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        /* --- LAYER 2: LUXURY BLUE OVERLAY --- */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            /* Deep blue gradient map to unify the scene */
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.7), rgba(30, 58, 138, 0.85));
+            mix-blend-mode: multiply;
             z-index: -2;
         }
 
-        /* Dark Overlay for readability */
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(10, 5, 20, 0.4), rgba(5, 2, 10, 0.85));
-            z-index: -1;
-        }
-
-        /* Ambient Purple Glow Orb behind the card */
-        .glow-orb {
+        /* --- LAYER 3: AMBIENT LIGHTING --- */
+        .ambient-light {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: var(--purple-glow);
-            filter: blur(180px);
-            opacity: 0.3;
-            border-radius: 50%;
-            animation: floatOrb 10s ease-in-out infinite alternate;
-            z-index: 0;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(0,0,0,0) 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.6;
+            animation: pulseLight 8s infinite alternate;
         }
 
-        @keyframes floatOrb {
-            0% { transform: translate(-50px, -50px); }
-            100% { transform: translate(50px, 50px); }
+        @keyframes pulseLight {
+            0% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
         }
 
-        /* --- ULTRA GLASS CARD --- */
+        /* --- MAIN "DIAMOND ICE" CARD --- */
         .container {
             position: relative;
             z-index: 10;
             text-align: center;
-            padding: 40px 30px;
+            padding: 50px 40px;
             max-width: 90%;
-            width: 500px;
+            width: 600px;
             
-            /* The Advanced Glass Effect */
+            /* The "1000 IQ" Glass Effect */
             background: var(--glass-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            border-top: 1px solid rgba(255,255,255,0.2);
-            border-left: 1px solid rgba(255,255,255,0.2);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            /* Extreme blur for depth */
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
             
-            animation: cardFloat 6s ease-in-out infinite;
-            color: white;
+            border-radius: 30px;
+            
+            /* Complex Crystal Border Simulation */
+            border: 2px solid transparent;
+            background-clip: padding-box; /* Important for the gradient border trick */
+            position: relative;
+            box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8),
+                        inset 0 0 30px rgba(255,255,255,0.05);
+
+            animation: floatCard 8s ease-in-out infinite;
         }
 
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* The gradient border magic */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px; bottom: -2px;
+            left: -2px; right: -2px;
+            background: var(--crystal-border);
+            z-index: -1;
+            border-radius: 32px;
         }
 
-        /* --- LOGO STYLING --- */
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-15px) rotateX(2deg); }
+        }
+
+        /* --- TYPOGRAPHY & CONTENT --- */
         .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
+            margin-bottom: 10px;
             letter-spacing: -1px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 15px rgba(147, 51, 234, 0.5));
+            /* Silver reflection effect */
+            background: linear-gradient(to bottom, #ffffff, #dbeafe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(6, 182, 212, 0.3));
         }
-        .logo .talent { color: white; }
         .logo .ido { 
-            background: linear-gradient(135deg, #c084fc, #9333ea);
+            /* Electric Cyan Accent */
+            background: linear-gradient(135deg, #ffffff, var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        /* Subtle glow on the DO */
+        .logo .ido::after {
+            content: 'DO';
+            position: absolute;
+            left: 0; top:0;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.7;
+            background: var(--neon-cyan);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .tagline {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
             font-weight: 300;
-            margin-bottom: 25px;
+            opacity: 0.9;
+            margin-bottom: 30px;
             letter-spacing: 0.5px;
         }
 
-        /* Divider with Christmas Colors */
         .divider {
-            width: 80px;
+            width: 100px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--red), var(--purple), transparent);
-            margin: 0 auto 25px auto;
+            /* Ruby to Cyan gradient */
+            background: linear-gradient(90deg, transparent, var(--ruby-red), var(--neon-cyan), transparent);
+            margin: 0 auto 30px auto;
             border-radius: 100%;
-            opacity: 0.8;
+            opacity: 0.9;
+            filter: blur(0.5px);
         }
 
-        /* --- LAUNCH TEXT --- */
         .launch {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 25px;
             letter-spacing: 1px;
-            color: #fca5a5; /* Soft Red */
-            text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(190, 18, 60, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
+        .launch span { font-size: 1.5rem; }
 
-        /* --- COUNTDOWN --- */
+        /* --- LUXURY COUNTDOWN BLOCKS --- */
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
         }
 
         .time-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 15px 5px;
-            transition: transform 0.3s ease, background 0.3s ease;
+            /* Individual Ice Cubes */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.4); /* Highlight top edge */
+            border-radius: 20px;
+            padding: 18px 5px;
             position: relative;
             overflow: hidden;
-        }
-        
-        /* Shine effect on boxes */
-        .time-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 3s infinite;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
         }
 
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 100%; }
-            100% { left: 100%; }
+        /* Shimmer effect across the ice cubes */
+        .time-box::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 40%; height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(25deg);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -60%; }
+            100% { left: 120%; }
         }
 
         .time-box:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(147, 51, 234, 0.5);
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.2);
         }
 
         .time-box span {
             display: block;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to bottom, #ffffff, #e9d5ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            /* Clean white numbering */
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
             line-height: 1;
         }
 
         .time-box small {
             display: block;
-            margin-top: 5px;
-            font-size: 0.65rem;
+            margin-top: 8px;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .footer {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: var(--ice-blue);
+            opacity: 0.6;
             line-height: 1.6;
             font-weight: 300;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* --- SNOW ANIMATION --- */
+        /* --- ADVANCED SNOW PARTICLES --- */
         .snowflake {
             position: absolute;
-            top: -20px;
+            top: -5vh;
             color: white;
-            opacity: 0.8;
+            opacity: 0; /* Start invisible */
             pointer-events: none;
-            z-index: 5;
-            text-shadow: 0 0 5px rgba(255,255,255,0.8);
-            animation-name: fall, sway;
-            animation-timing-function: linear, ease-in-out;
-            animation-iteration-count: infinite, infinite;
+            z-index: 1;
+            /* Varying blur for depth of field */
+            filter: blur(0.5px);
+            will-change: transform;
+            animation: snowfall linear infinite;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh); }
-        }
-        @keyframes sway {
-            0% { margin-left: 0; }
-            50% { margin-left: 20px; }
-            100% { margin-left: 0; }
+        @keyframes snowfall {
+            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* Desktop Adjustments */
-        @media (min-width: 768px) {
-            .container { padding: 50px; width: 650px; }
-            .logo { font-size: 4rem; }
-            .tagline { font-size: 1.2rem; }
-            .countdown { gap: 20px; }
-            .time-box span { font-size: 2.5rem; }
-            .time-box small { font-size: 0.8rem; }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5rem; }
+            .countdown { gap: 8px; }
+            .time-box { padding: 12px 2px; border-radius: 16px; }
+            .time-box span { font-size: 1.6rem; }
+            .time-box small { font-size: 0.5rem; }
+            .container { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-image"></div>
+    <div class="bg-cinematic"></div>
     <div class="bg-overlay"></div>
-    <div class="glow-orb"></div>
+    <div class="ambient-light"></div>
 
     <div class="container">
         <div class="logo">
@@ -292,42 +345,44 @@
         </div>
 
         <div class="footer">
-            © TalentiDO · Wiehnachts-Edition 🎁⚽<br>
+            © TalentiDO · Luxury Edition 🎁⚽<br>
             Für di nöchste Champions vo morn
         </div>
     </div>
 
     <script>
-        // --- SNOW GENERATION ---
+        // --- ADVANCED PARALLAX SNOW GENERATION ---
         function createSnow() {
             const snowContainer = document.body;
-            const flakes = 40; // Number of flakes
+            const flakes = 60; // More flakes for luxury feel
 
             for (let i = 0; i < flakes; i++) {
                 const snow = document.createElement("div");
                 snow.className = "snowflake";
                 snow.innerHTML = "❄";
                 
-                // Random positioning and sizing
+                // Randomize everything for natural feel
+                const size = Math.random() * 12 + 8; // 8px to 20px
                 snow.style.left = Math.random() * 100 + "vw";
-                snow.style.fontSize = Math.random() * 10 + 10 + "px";
-                snow.style.opacity = Math.random() * 0.5 + 0.3;
+                snow.style.fontSize = size + "px";
                 
-                // Random animation speeds
-                const fallDuration = Math.random() * 5 + 5 + "s";
-                const swayDuration = Math.random() * 2 + 2 + "s";
-                const delay = Math.random() * 5 + "s";
+                // Depth of field effect: smaller flakes are blurrier and slower
+                const blur = (20 - size) / 5; 
+                snow.style.filter = `blur(${blur}px)`;
+                snow.style.opacity = Math.random() * 0.6 + 0.2;
+                
+                const duration = Math.random() * 10 + 8 + "s"; // Slower fall
+                const delay = Math.random() * 10 + "s";
 
-                snow.style.animationDuration = `${fallDuration}, ${swayDuration}`;
-                snow.style.animationDelay = `${delay}, ${delay}`;
+                snow.style.animationDuration = duration;
+                snow.style.animationDelay = delay;
 
                 snowContainer.appendChild(snow);
             }
         }
         createSnow();
 
-        // --- COUNTDOWN LOGIC ---
-        // Target: December 25, 2025
+        // --- COUNTDOWN LOGIC (Unchanged) ---
         const launchDate = new Date("December 25, 2025 00:00:00").getTime();
 
         const timer = setInterval(() => {
@@ -336,7 +391,7 @@
 
             if (distance < 0) {
                 clearInterval(timer);
-                document.querySelector('.countdown').innerHTML = "<div style='grid-column: span 4; font-size: 2rem; font-weight:bold;'>Mir sind LIVE! 🚀</div>";
+                document.querySelector('.countdown').innerHTML = "<div style='grid-column: span 4; font-size: 2rem; font-weight:800; color: var(--neon-cyan); text-shadow: 0 0 20px var(--neon-cyan);'>Mir sind LIVE! 🚀</div>";
                 return;
             }
 
@@ -345,7 +400,6 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Add leading zeros
             document.getElementById("days").innerText = days < 10 ? "0" + days : days;
             document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
             document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
