@@ -19,7 +19,11 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #1a0f2e, var(--bg));
+      background:
+        linear-gradient(rgba(5,5,5,0.75), rgba(5,5,5,0.9)),
+        url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1600&auto=format&fit=crop");
+      background-size: cover;
+      background-position: center;
       color: white;
       font-family: 'Inter', sans-serif;
       display: flex;
@@ -29,25 +33,14 @@
       position: relative;
     }
 
-    /* Glow background */
     body::before {
       content: "";
       position: absolute;
-      width: 500px;
-      height: 500px;
-      background: var(--purple);
-      filter: blur(200px);
-      opacity: 0.25;
-      animation: float 12s ease-in-out infinite;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(147,51,234,0.25), transparent 60%);
       z-index: 0;
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-60px); }
-    }
-
-    /* Snow */
     .snowflake {
       position: absolute;
       top: -10px;
@@ -65,14 +58,22 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 20px;
-      max-width: 360px;
+      padding: 28px 22px;
+      max-width: 380px;
       width: 100%;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 25px 60px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.15);
       animation: fadeUp 1s ease forwards;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(25px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -82,23 +83,26 @@
     }
 
     .logo .talent { color: white; }
+
     .logo .ido {
       color: var(--purple);
-      text-shadow: 0 0 20px rgba(147,51,234,0.7);
+      text-shadow:
+        0 0 20px rgba(147,51,234,0.7),
+        0 0 40px rgba(147,51,234,0.4);
     }
 
     .tagline {
       margin-top: 10px;
       font-size: 0.95rem;
-      opacity: 0.85;
-      line-height: 1.4;
+      opacity: 0.9;
+      line-height: 1.5;
     }
 
     .divider {
       width: 60px;
       height: 2px;
       background: linear-gradient(90deg, var(--red), var(--purple));
-      margin: 20px auto;
+      margin: 22px auto;
       border-radius: 2px;
     }
 
@@ -118,54 +122,58 @@
     .countdown {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 10px;
+      gap: 10px;
+      margin-top: 12px;
     }
 
     .time-box {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 10px 6px;
-      border-radius: 10px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 6px;
+      border-radius: 14px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
     }
 
     .time-box span {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--purple);
     }
 
     .time-box small {
       font-size: 0.55rem;
-      opacity: 0.7;
-      letter-spacing: 0.5px;
+      opacity: 0.75;
+      letter-spacing: 0.6px;
     }
 
     .footer {
-      margin-top: 24px;
+      margin-top: 26px;
       font-size: 0.7rem;
-      opacity: 0.6;
-      line-height: 1.4;
+      opacity: 0.65;
+      line-height: 1.5;
     }
 
-    /* Desktop */
     @media (min-width: 768px) {
-      .container { max-width: 600px; padding: 40px; }
-      .logo { font-size: 3.5rem; }
-      .tagline { font-size: 1.1rem; }
-      .launch { font-size: 1.5rem; }
+      .container {
+        max-width: 620px;
+        padding: 42px;
+      }
+      .logo { font-size: 3.6rem; }
+      .tagline { font-size: 1.15rem; }
+      .launch { font-size: 1.55rem; }
       .countdown {
         display: flex;
-        gap: 20px;
+        gap: 22px;
         justify-content: center;
       }
-      .time-box span { font-size: 1.8rem; }
+      .time-box span { font-size: 1.9rem; }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Snow generation -->
   <script>
     for (let i = 0; i < 30; i++) {
       const snow = document.createElement("div");
@@ -218,7 +226,6 @@
     </div>
   </div>
 
-  <!-- Countdown -->
   <script>
     const launchDate = new Date("December 25, 2025 00:00:00").getTime();
 
