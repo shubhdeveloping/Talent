@@ -1,248 +1,357 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>TalentiDO – Start am 25. Dezämber</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentiDO - Start am 25. Dezämber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --purple: #a855f7;
+            --purple-glow: #9333ea;
+            --red: #ef4444;
+            --glass-bg: rgba(20, 20, 25, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; }
 
-  <style>
-    :root {
-      --purple: #9333EA;
-      --bg: #050505;
-      --red: #b91c1c;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            background-color: #050505;
+        }
 
-    * { box-sizing: border-box; }
+        /* --- ZURICH BACKGROUND --- */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Image of Zurich in Winter/Night */
+            background-image: url('https://images.unsplash.com/photo-1515516089376-88db1e26e9c0?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        linear-gradient(rgba(5,5,5,0.75), rgba(5,5,5,0.9)),
-        url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1600&auto=format&fit=crop");
-      background-size: cover;
-      background-position: center;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      position: relative;
-    }
+        /* Dark Overlay for readability */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(10, 5, 20, 0.4), rgba(5, 2, 10, 0.85));
+            z-index: -1;
+        }
 
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(147,51,234,0.25), transparent 60%);
-      z-index: 0;
-    }
+        /* Ambient Purple Glow Orb behind the card */
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: var(--purple-glow);
+            filter: blur(180px);
+            opacity: 0.3;
+            border-radius: 50%;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+            z-index: 0;
+        }
 
-    .snowflake {
-      position: absolute;
-      top: -10px;
-      color: white;
-      opacity: 0.8;
-      animation: fall linear infinite;
-      z-index: 1;
-    }
+        @keyframes floatOrb {
+            0% { transform: translate(-50px, -50px); }
+            100% { transform: translate(50px, 50px); }
+        }
 
-    @keyframes fall {
-      to { transform: translateY(110vh); }
-    }
+        /* --- ULTRA GLASS CARD --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px 30px;
+            max-width: 90%;
+            width: 500px;
+            
+            /* The Advanced Glass Effect */
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            border-left: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            
+            animation: cardFloat 6s ease-in-out infinite;
+            color: white;
+        }
 
-    .container {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 28px 22px;
-      max-width: 380px;
-      width: 100%;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(18px) saturate(140%);
-      -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow:
-        0 25px 60px rgba(0,0,0,0.55),
-        inset 0 1px 0 rgba(255,255,255,0.15);
-      animation: fadeUp 1s ease forwards;
-    }
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        /* --- LOGO STYLING --- */
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 0 15px rgba(147, 51, 234, 0.5));
+        }
+        .logo .talent { color: white; }
+        .logo .ido { 
+            background: linear-gradient(135deg, #c084fc, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .logo {
-      font-size: 2.4rem;
-      font-weight: 700;
-    }
+        .tagline {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
 
-    .logo .talent { color: white; }
+        /* Divider with Christmas Colors */
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--red), var(--purple), transparent);
+            margin: 0 auto 25px auto;
+            border-radius: 100%;
+            opacity: 0.8;
+        }
 
-    .logo .ido {
-      color: var(--purple);
-      text-shadow:
-        0 0 20px rgba(147,51,234,0.7),
-        0 0 40px rgba(147,51,234,0.4);
-    }
+        /* --- LAUNCH TEXT --- */
+        .launch {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fca5a5; /* Soft Red */
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-    .tagline {
-      margin-top: 10px;
-      font-size: 0.95rem;
-      opacity: 0.9;
-      line-height: 1.5;
-    }
+        /* --- COUNTDOWN --- */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
 
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--red), var(--purple));
-      margin: 22px auto;
-      border-radius: 2px;
-    }
+        .time-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 15px 5px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Shine effect on boxes */
+        .time-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
 
-    .launch {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      animation: pulse 2s infinite;
-    }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
 
-    @keyframes pulse {
-      0% { opacity: 0.6; }
-      50% { opacity: 1; }
-      100% { opacity: 0.6; }
-    }
+        .time-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(147, 51, 234, 0.5);
+        }
 
-    .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom, #ffffff, #e9d5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
 
-    .time-box {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 12px 6px;
-      border-radius: 14px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
-    }
+        .time-box small {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-    .time-box span {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--purple);
-    }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+            font-weight: 300;
+        }
 
-    .time-box small {
-      font-size: 0.55rem;
-      opacity: 0.75;
-      letter-spacing: 0.6px;
-    }
+        /* --- SNOW ANIMATION --- */
+        .snowflake {
+            position: absolute;
+            top: -20px;
+            color: white;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 5;
+            text-shadow: 0 0 5px rgba(255,255,255,0.8);
+            animation-name: fall, sway;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+        }
 
-    .footer {
-      margin-top: 26px;
-      font-size: 0.7rem;
-      opacity: 0.65;
-      line-height: 1.5;
-    }
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+        @keyframes sway {
+            0% { margin-left: 0; }
+            50% { margin-left: 20px; }
+            100% { margin-left: 0; }
+        }
 
-    @media (min-width: 768px) {
-      .container {
-        max-width: 620px;
-        padding: 42px;
-      }
-      .logo { font-size: 3.6rem; }
-      .tagline { font-size: 1.15rem; }
-      .launch { font-size: 1.55rem; }
-      .countdown {
-        display: flex;
-        gap: 22px;
-        justify-content: center;
-      }
-      .time-box span { font-size: 1.9rem; }
-    }
-  </style>
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            .container { padding: 50px; width: 650px; }
+            .logo { font-size: 4rem; }
+            .tagline { font-size: 1.2rem; }
+            .countdown { gap: 20px; }
+            .time-box span { font-size: 2.5rem; }
+            .time-box small { font-size: 0.8rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-  <script>
-    for (let i = 0; i < 30; i++) {
-      const snow = document.createElement("div");
-      snow.className = "snowflake";
-      snow.innerHTML = "❄";
-      snow.style.left = Math.random() * 100 + "vw";
-      snow.style.animationDuration = 6 + Math.random() * 10 + "s";
-      snow.style.fontSize = 8 + Math.random() * 12 + "px";
-      document.body.appendChild(snow);
-    }
-  </script>
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+    <div class="glow-orb"></div>
 
-  <div class="container">
-    <div class="logo">
-      <span class="talent">Talent</span><span class="ido">iDO</span>
+    <div class="container">
+        <div class="logo">
+            <span class="talent">Talenti</span><span class="ido">DO</span>
+        </div>
+        
+        <div class="tagline">
+            Mir forme d Zuekunft vo junge Fuessball-Talänt i de Schwiiz
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="launch">
+            <span>🎄</span> Start am Wiehnachte · 25. Dezämber
+        </div>
+
+        <div class="countdown">
+            <div class="time-box">
+                <span id="days">00</span>
+                <small>Täg</small>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <small>Stundä</small>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <small>Minute</small>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <small>Sekundä</small>
+            </div>
+        </div>
+
+        <div class="footer">
+            © TalentiDO · Wiehnachts-Edition 🎁⚽<br>
+            Für di nöchste Champions vo morn
+        </div>
     </div>
 
-    <div class="tagline">
-      Mir forme d Zuekunft vo junge Fuessball-Talänt i de Schwiiz
-    </div>
+    <script>
+        // --- SNOW GENERATION ---
+        function createSnow() {
+            const snowContainer = document.body;
+            const flakes = 40; // Number of flakes
 
-    <div class="divider"></div>
+            for (let i = 0; i < flakes; i++) {
+                const snow = document.createElement("div");
+                snow.className = "snowflake";
+                snow.innerHTML = "❄";
+                
+                // Random positioning and sizing
+                snow.style.left = Math.random() * 100 + "vw";
+                snow.style.fontSize = Math.random() * 10 + 10 + "px";
+                snow.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                // Random animation speeds
+                const fallDuration = Math.random() * 5 + 5 + "s";
+                const swayDuration = Math.random() * 2 + 2 + "s";
+                const delay = Math.random() * 5 + "s";
 
-    <div class="launch">
-      🎄 Start am Wiehnachte · 25. Dezämber
-    </div>
+                snow.style.animationDuration = `${fallDuration}, ${swayDuration}`;
+                snow.style.animationDelay = `${delay}, ${delay}`;
 
-    <div class="countdown">
-      <div class="time-box">
-        <span id="days">00</span>
-        <small>Täg</small>
-      </div>
-      <div class="time-box">
-        <span id="hours">00</span>
-        <small>Stundä</small>
-      </div>
-      <div class="time-box">
-        <span id="minutes">00</span>
-        <small>Minute</small>
-      </div>
-      <div class="time-box">
-        <span id="seconds">00</span>
-        <small>Sekundä</small>
-      </div>
-    </div>
+                snowContainer.appendChild(snow);
+            }
+        }
+        createSnow();
 
-    <div class="footer">
-      © TalentiDO · Wiehnachts-Edition 🎁⚽<br>
-      Für di nöchste Champions vo morn
-    </div>
-  </div>
+        // --- COUNTDOWN LOGIC ---
+        // Target: December 25, 2025
+        const launchDate = new Date("December 25, 2025 00:00:00").getTime();
 
-  <script>
-    const launchDate = new Date("December 25, 2025 00:00:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
 
-    setInterval(() => {
-      const now = new Date().getTime();
-      const d = launchDate - now;
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector('.countdown').innerHTML = "<div style='grid-column: span 4; font-size: 2rem; font-weight:bold;'>Mir sind LIVE! 🚀</div>";
+                return;
+            }
 
-      document.getElementById("days").innerText =
-        Math.max(0, Math.floor(d / (1000 * 60 * 60 * 24)));
-      document.getElementById("hours").innerText =
-        Math.max(0, Math.floor((d / (1000 * 60 * 60)) % 24));
-      document.getElementById("minutes").innerText =
-        Math.max(0, Math.floor((d / (1000 * 60)) % 60));
-      document.getElementById("seconds").innerText =
-        Math.max(0, Math.floor((d / 1000) % 60));
-    }, 1000);
-  </script>
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+            // Add leading zeros
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+        }, 1000);
+    </script>
 </body>
 </html>
