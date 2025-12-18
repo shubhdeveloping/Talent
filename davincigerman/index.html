@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth" style="scroll-padding-top: 100px;">
+<html lang="de" class="scroll-smooth" style="scroll-padding-top: 80px;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -202,8 +202,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    .section-spacing { margin-bottom: 4rem; }
-    @media (min-width: 768px) { .section-spacing { margin-bottom: 8rem; } }
+    /* Tighter section spacing */
+    .section-spacing { margin-bottom: 2rem; }
+    @media (min-width: 768px) { .section-spacing { margin-bottom: 4rem; } }
   </style>
 </head>
 
@@ -642,6 +643,43 @@
     </div>
 </div>
 
+<div id="legal-overlay" class="fixed inset-0 z-[100] bg-[#05020A] hidden overflow-y-auto transform transition-opacity duration-200">
+    <div class="fixed top-0 left-0 w-full h-16 bg-[#05020A]/90 backdrop-blur-md border-b border-white/10 z-50 flex items-center justify-between px-6">
+        <div class="font-display font-bold text-lg">
+             <span class="text-white">talent</span><span class="text-brand-accent">iDO</span> <span class="text-gray-400 text-xs ml-2">Legal</span>
+        </div>
+        <button onclick="toggleLegal()" class="text-white bg-white/10 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Schließen</button>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto pt-24 pb-12 px-6">
+        <div class="liquid-card p-6 md:p-10 rounded-2xl">
+            <h1 class="text-3xl font-display font-bold text-white mb-6">Rechtsverletzung, Haftung & Schadensersatz</h1>
+            
+            <div class="space-y-6 font-light text-gray-300 text-sm leading-relaxed">
+                
+                <p>Jede unbefugte Kopie, Nachahmung, Reproduktion, Extraktion, Wiederverwendung, Anpassung oder kommerzielle Verwertung dieser Website oder Teilen davon, einschließlich Konzept, Idee, Thema, Struktur, Layout, Design, visueller Ablauf, Texte, Branding oder Gesamtdarstellung, stellt eine wesentliche Verletzung geistigen Eigentums und des Gesetzes gegen den unlauteren Wettbewerb dar, anwendbar in der Schweiz und der Europäischen Union.</p>
+
+                <p>Im Falle einer solchen Verletzung haftet die verletzende Partei im gesetzlich maximal zulässigen Umfang für:</p>
+
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Alle direkten und indirekten Schäden, einschließlich finanzieller Verluste, entgangener Geschäftsmöglichkeiten und Reputationsschäden</li>
+                    <li>Herausgabe aller Gewinne oder Vorteile, die direkt oder indirekt durch die Verletzung erzielt wurden</li>
+                    <li>Eine vertraglich vereinbarte Mindestentschädigung von <strong>CHF 50.000</strong> pro Verletzung, soweit gesetzlich zulässig, unbeschadet des Rechts, höheren Schadensersatz geltend zu machen</li>
+                    <li>Alle angemessenen Rechts-, Ermittlungs-, Verwaltungs- und Vollstreckungskosten, einschließlich Anwalts- und Gerichtskosten</li>
+                    <li>Sofortige Unterlassungs- und Billigkeitsansprüche, einschließlich dauerhafter Einstellung, Entfernung und Vernichtung verletzender Materialien</li>
+                </ul>
+
+                <p>Der Website-Inhaber behält sich ausdrücklich das Recht vor, weitere zivilrechtliche, vertragliche und gesetzliche Rechtsmittel einzulegen, einschließlich einstweiliger Verfügungen, um sein geistiges Eigentum und seine kommerziellen Interessen zu schützen.</p>
+
+            </div>
+
+            <div class="mt-8 text-center border-t border-white/5 pt-6">
+                 <button onclick="toggleLegal()" class="text-gray-400 underline hover:text-white transition">Rechtliche Hinweise schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl h-16 glass-nav rounded-full flex items-center justify-between px-6 z-50 shadow-2xl">
   <div class="flex items-center gap-2">
     <div class="flex items-center font-display font-bold">
@@ -681,7 +719,7 @@
     </button>
 </div>
 
-<section class="min-h-[auto] md:min-h-[95vh] flex flex-col lg:flex-row items-center justify-center px-3 md:px-6 pt-24 relative z-10 max-w-7xl mx-auto gap-8 lg:gap-20 section-spacing">
+<section class="min-h-[auto] md:min-h-[95vh] flex flex-col lg:flex-row items-center justify-center px-3 md:px-6 pt-24 md:pt-32 relative z-10 max-w-7xl mx-auto gap-12 lg:gap-20 section-spacing">
   
   <div class="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left hero-glass-panel p-6 md:p-10">
       <div class="mb-6 inline-block px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-deep/80 backdrop-blur-sm animate-pulse-slow">
@@ -730,7 +768,7 @@
                         <div class="mb-4 relative">
                             <div class="text-sm text-gray-500 line-through mb-1 font-mono">CHF 1.000</div>
                             <div class="text-6xl md:text-7xl font-display font-bold text-white tracking-tighter leading-none drop-shadow-lg">
-                                149<span class="text-4xl md:text-5xl text-[#FFD700] font-bold ml-2 align-middle">CHF</span>
+                                149<span class="text-4xl md:text-5xl text-[#FFD700] font-sans font-bold ml-2 align-middle">CHF</span>
                             </div>
                         </div>
                     </div>
@@ -758,7 +796,7 @@
   </div>
 </section>
 
-<section class="py-12 relative z-20 w-full max-w-7xl mx-auto mb-4">
+<section class="py-6 relative z-20 w-full max-w-7xl mx-auto mb-4">
     <div class="text-center mb-8">
         <h2 class="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">VERTRAUENSWÜRDIGES ÖKOSYSTEM</h2>
         <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full shadow-[0_0_10px_#A855F7]"></div>
@@ -783,7 +821,7 @@
 </section>
 
 <div class="text-center mb-4 mt-2 relative z-10">
-    <span class="text-brand-cyan font-mono text-[10px] tracking-[0.2em] uppercase font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">Vereinspartner</span>
+    <span class="text-brand-cyan font-display text-sm tracking-[0.2em] uppercase font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">Vereinspartner</span>
 </div>
 
 <div class="w-full overflow-hidden bg-brand-deep/30 border-y border-white/5 py-4 mb-8 relative">
@@ -812,7 +850,7 @@
 
 <section id="benefits" class="px-6 max-w-7xl mx-auto relative z-10 mb-12">
   <div class="text-center mb-12">
-    <span class="text-brand-cyan font-mono text-[10px] tracking-[0.2em] uppercase mb-4 block font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
+    <span class="text-brand-cyan font-display text-sm tracking-[0.2em] uppercase mb-4 block font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
       Gesamtwert: CHF 1.000+
     </span>
     <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
@@ -985,6 +1023,7 @@
       <div class="flex gap-6 items-center">
           <button onclick="toggleTerms()" class="hover:text-white transition">AGB</button>
           <button onclick="togglePrivacy()" class="hover:text-white transition">Datenschutz</button>
+          <button onclick="toggleLegal()" class="hover:text-white transition">Rechtliche Hinweise</button>
           <a href="https://www.talentido.com" target="_blank" class="text-brand-accent hover:text-white transition">NFTs</a>
           <a href="mailto:coo@talentido.com" class="hover:text-white transition font-bold border border-brand-accent/30 px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm text-brand-accent">Kontakt</a>
       </div>
@@ -1012,6 +1051,10 @@
     }
     function toggleTerms() {
         const overlay = document.getElementById('terms-overlay');
+        overlay.classList.toggle('hidden');
+    }
+    function toggleLegal() {
+        const overlay = document.getElementById('legal-overlay');
         overlay.classList.toggle('hidden');
     }
 
