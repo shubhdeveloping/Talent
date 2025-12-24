@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TalentiDO - Luxury Reveal</title>
+    <title>TalentiDO - Exklusive Enthüllung</title>
     
     <meta name="description" content="TalentiDO - Mir forme d Zuekunft vo junge Fuessball-Talänt.">
-    <meta property="og:title" content="TalentiDO - Luxury Reveal">
-    <meta property="og:description" content="Going Live Soon. Wiehnachts-Edition.">
+    <meta property="og:title" content="TalentiDO - Exklusive Enthüllung">
+    <meta property="og:description" content="Demnächst Live. Wiehnachts-Edition.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1605540447171-2661b7562062?q=80&w=2071">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
             filter: brightness(0.5) contrast(1.1);
         }
 
-        /* 2. Film Grain (The "Expensive" Texture) */
+        /* 2. Film Grain */
         .bg-noise {
             position: fixed;
             inset: 0;
@@ -111,7 +111,7 @@
             /* High-Performance Glassmorphism */
             background: var(--glass-bg);
             backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur)); /* Safari */
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             border-radius: 24px;
             border: var(--glass-border);
             box-shadow: 
@@ -134,7 +134,7 @@
         /* --- TYPOGRAPHY & ELEMENTS --- */
         
         .logo {
-            /* Fluid Font Size: Scales between 2.5rem and 4rem */
+            /* Fluid Font Size */
             font-size: clamp(2.8rem, 8vw, 4.2rem);
             font-weight: 900;
             margin-bottom: 0.5rem;
@@ -295,25 +295,25 @@
         <div class="status-container">
             <div class="status-badge">
                 <div class="status-dot"></div>
-                Initializing Launch
+                Start wird konfiguriert
             </div>
             <div class="live-message">
-                GOING LIVE SOON
+                DEMNÄCHST LIVE
             </div>
         </div>
 
         <footer class="footer">
-            &copy; 2025 TalentiDO · Future Champions<br>
-            Made in Zurich
+            &copy; 2025 TalentiDO · Die Champions von morgen<br>
+            Made in Zürich
         </footer>
     </main>
 
     <script>
-        // Optimized Snow Effect (Low CPU Usage)
+        // Optimized Snow Effect
         document.addEventListener('DOMContentLoaded', () => {
             const snowContainer = document.body;
             const isMobile = window.innerWidth < 768;
-            const flakes = isMobile ? 20 : 50; // Reduce flakes on mobile for performance
+            const flakes = isMobile ? 20 : 50; 
 
             for (let i = 0; i < flakes; i++) {
                 const snow = document.createElement("div");
@@ -324,7 +324,6 @@
                 snow.style.fontSize = (Math.random() * 10 + 8) + "px";
                 snow.style.filter = `blur(${Math.random() * 1.5}px)`;
                 
-                // Randomize timing
                 const duration = Math.random() * 5 + 6 + "s";
                 const delay = Math.random() * 5 + "s";
 
