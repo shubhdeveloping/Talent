@@ -134,7 +134,6 @@
         .logo .ido { 
             color: var(--brand-purple);
             text-shadow: 0 0 25px rgba(147, 51, 234, 0.8);
-            /* REMOVED italic style here */
             font-style: normal;
         }
 
@@ -160,7 +159,7 @@
         .launch {
             font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             letter-spacing: 1px;
             color: #f3f4f6; 
             display: flex;
@@ -169,46 +168,25 @@
             gap: 12px;
         }
 
-        /* --- COUNTDOWN --- */
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .time-box {
-            background: rgba(20, 20, 20, 0.6); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            padding: 18px 5px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .time-box:hover {
-            border-color: var(--brand-purple);
-            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .time-box span {
-            display: block;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: white;
-            line-height: 1;
-        }
-
-        .time-box small {
-            display: block;
-            margin-top: 8px;
-            font-size: 0.6rem;
+        /* --- NEW LIVE MESSAGE STYLE --- */
+        .live-message {
+            margin-top: 25px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--brand-purple);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            color: #a3a3a3;
+            letter-spacing: 2px;
+            text-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+            animation: pulseText 2s infinite ease-in-out;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            background: rgba(147, 51, 234, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.8; transform: scale(1); box-shadow: 0 0 20px rgba(147, 51, 234, 0.1); }
+            50% { opacity: 1; transform: scale(1.02); box-shadow: 0 0 40px rgba(147, 51, 234, 0.3); }
         }
 
         .footer {
@@ -240,12 +218,13 @@
         /* Desktop Adjustments */
         @media (min-width: 768px) {
             .logo { font-size: 4rem; }
-            .time-box span { font-size: 2.5rem; }
+            .live-message { font-size: 3rem; }
         }
         
         @media (max-width: 768px) {
              .logo { font-size: 2.8rem; }
              .container { padding: 30px 20px; }
+             .live-message { font-size: 1.8rem; padding: 15px; }
         }
     </style>
 </head>
@@ -267,26 +246,11 @@
         <div class="divider"></div>
 
         <div class="launch">
-            <span>🎄</span> Start am Wiehnachte · 25. Dezämber
+            <span>🎄</span> Start am Wiehnachte
         </div>
 
-        <div class="countdown">
-            <div class="time-box">
-                <span id="days">00</span>
-                <small>Täg</small>
-            </div>
-            <div class="time-box">
-                <span id="hours">00</span>
-                <small>Stundä</small>
-            </div>
-            <div class="time-box">
-                <span id="minutes">00</span>
-                <small>Minute</small>
-            </div>
-            <div class="time-box">
-                <span id="seconds">00</span>
-                <small>Sekundä</small>
-            </div>
+        <div class="live-message">
+            GOING LIVE SOON
         </div>
 
         <div class="footer">
@@ -322,30 +286,7 @@
         }
         createSnow();
 
-        // TIMER
-        const launchDate = new Date("December 25, 2025 00:00:00").getTime();
-
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-
-            if (distance < 0) {
-                clearInterval(timer);
-                document.querySelector('.countdown').innerHTML = "<div style='grid-column: span 4; font-size: 2rem; color: #9333EA; font-weight:800;'>LIVE NOW!</div>";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-
-        }, 1000);
+        // TIMER REMOVED AS REQUESTED
     </script>
 </body>
 </html>
