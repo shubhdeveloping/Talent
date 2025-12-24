@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TalentiDO - Luxury Reveal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* BRAND PALETTE */
+            /* BRAND COLORS */
             --brand-purple: #9333EA;
-            --brand-purple-glow: #a855f7;
+            --brand-purple-light: #c084fc;
             --brand-purple-dark: #581c87;
+            --pure-black: #000000;
             --accent-red: #ef4444; 
-            --gold: #fbbf24;
             
-            /* GLASS & SURFACE */
-            --glass-bg: rgba(10, 10, 10, 0.65);
-            --glass-border: 1px solid rgba(147, 51, 234, 0.25);
-            --surface-gradient: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            /* DARK GLASS VARIABLES */
+            --glass-bg: rgba(0, 0, 0, 0.75);
+            --glass-border: 1px solid rgba(147, 51, 234, 0.3);
         }
 
         * { box-sizing: border-box; }
@@ -32,12 +31,11 @@
             justify-content: center;
             overflow: hidden;
             position: relative;
-            background-color: #000;
+            background-color: var(--pure-black);
             color: white;
-            perspective: 1000px; /* Essential for 3D effect */
         }
 
-        /* --- LAYER 1: CINEMATIC BG --- */
+        /* --- BACKGROUND LAYER 1: ZURICH NIGHT (Darkened) --- */
         .bg-cinematic {
             position: fixed;
             top: -5%; left: -5%;
@@ -46,214 +44,158 @@
             background-size: cover;
             background-position: center center;
             z-index: -3;
-            animation: breatheZoom 30s infinite alternate ease-in-out;
-            filter: grayscale(90%) brightness(0.3) contrast(1.3);
+            animation: slowZoom 40s infinite alternate ease-in-out;
+            filter: grayscale(80%) brightness(0.4) contrast(1.2);
         }
 
-        @keyframes breatheZoom {
-            0% { transform: scale(1); filter: grayscale(90%) brightness(0.3); }
-            100% { transform: scale(1.15); filter: grayscale(80%) brightness(0.4); }
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
         }
 
-        /* --- LAYER 2: VIGNETTE & GRAIN --- */
+        /* --- BACKGROUND LAYER 2: BLACK OVERLAY --- */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, #000 90%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.6), rgba(0,0,0,0.95));
             z-index: -2;
-            pointer-events: none;
         }
 
-        /* --- LAYER 3: DYNAMIC GLOW --- */
+        /* --- BACKGROUND LAYER 3: PURPLE GLOW --- */
         .ambient-glow {
             position: absolute;
-            width: 800px; height: 800px;
-            background: radial-gradient(circle, var(--brand-purple-dark) 0%, transparent 70%);
+            width: 600px; height: 600px;
+            background: var(--brand-purple);
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: -1;
-            filter: blur(100px);
-            opacity: 0.4;
-            animation: pulseAmbient 5s infinite alternate;
+            filter: blur(150px);
+            opacity: 0.25; 
+            animation: pulseGlow 6s infinite alternate;
         }
 
-        @keyframes pulseAmbient {
-            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
-            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.1); }
+        @keyframes pulseGlow {
+            0% { opacity: 0.15; }
+            100% { opacity: 0.3; }
         }
 
-        /* --- 3D CARD CONTAINER --- */
-        .card-wrapper {
-            position: relative;
-            z-index: 10;
-            transform-style: preserve-3d; /* Key for 3D children */
-        }
-
+        /* --- CARD CONTAINER --- */
         .container {
             position: relative;
+            z-index: 10;
             text-align: center;
-            padding: 60px 40px;
-            width: 550px;
-            max-width: 90vw;
-            
-            /* GLASSMOPHISM PRO */
+            padding: 50px 40px;
+            max-width: 90%;
+            width: 600px;
             background: var(--glass-bg);
-            background-image: var(--surface-gradient);
-            backdrop-filter: blur(40px) saturate(140%);
-            -webkit-backdrop-filter: blur(40px) saturate(140%);
-            border-radius: 30px;
+            backdrop-filter: blur(30px) saturate(120%);
+            -webkit-backdrop-filter: blur(30px) saturate(120%);
+            border-radius: 24px;
             border: var(--glass-border);
-            
-            /* SHADOWS */
-            box-shadow: 
-                0 50px 100px -20px rgba(0,0,0,0.9),
-                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-                
-            transition: transform 0.1s ease-out; /* Smooth movement */
-            transform-style: preserve-3d;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9), 
+                        inset 0 0 20px rgba(147, 51, 234, 0.1);
+            animation: floatCard 8s ease-in-out infinite;
         }
 
-        /* GLOSSY SHEEN ANIMATION */
-        .container::after {
+        .container::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: skewX(-25deg);
-            animation: sheen 6s infinite;
-            pointer-events: none;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--brand-purple-light), transparent);
+            opacity: 0.7;
         }
 
-        @keyframes sheen {
-            0%, 80% { left: -100%; }
-            100% { left: 200%; }
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* --- CONTENT STYLING --- */
-        
-        /* 3D Depth for content elements */
-        .depth-layer {
-            transform: translateZ(40px); /* Lifts content off the card */
-        }
-
+        /* --- LOGO STYLING --- */
         .logo {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             letter-spacing: -2px;
+            /* Ensure all text is aligned */
             display: flex;
             justify-content: center;
             align-items: baseline;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
         
+        /* talent (lowercase, white) */
         .logo .talent { 
-            color: #fff;
-            background: linear-gradient(to bottom, #ffffff, #d1d5db);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
         
+        /* iDO (i lowercase, DO uppercase, purple) */
         .logo .ido { 
-            background: linear-gradient(to bottom, var(--brand-purple-light), var(--brand-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--brand-purple);
+            text-shadow: 0 0 25px rgba(147, 51, 234, 0.8);
             font-style: normal;
         }
 
         .tagline {
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 400;
-            color: #d4d4d4;
-            margin-bottom: 35px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 30px;
             letter-spacing: 0.5px;
+            color: #e5e5e5;
         }
 
         .divider {
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-red), var(--brand-purple));
-            margin: 0 auto 35px auto;
-            border-radius: 2px;
-            box-shadow: 0 0 15px var(--brand-purple);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-red), var(--brand-purple), transparent);
+            margin: 0 auto 30px auto;
+            border-radius: 100%;
+            opacity: 0.9;
         }
 
-        .launch-info {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
+        .launch {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            color: #f3f4f6; 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* --- HERO: GOING LIVE STATUS --- */
-        .live-status-container {
-            position: relative;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(147, 51, 234, 0.4);
-            border-radius: 16px;
-            padding: 25px 20px;
-            margin-top: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .live-status-container:hover {
-            border-color: var(--brand-purple-light);
-            box-shadow: 0 0 30px rgba(147, 51, 234, 0.2);
-        }
-
-        .live-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: var(--accent-red);
-            border-radius: 50%;
-            margin-right: 12px;
-            box-shadow: 0 0 10px var(--accent-red);
-            animation: blinkRed 1.5s infinite;
-        }
-
-        @keyframes blinkRed {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-        }
-
-        .status-text {
-            font-size: 1.8rem;
-            font-weight: 800;
+        /* --- NEW LIVE MESSAGE STYLE --- */
+        .live-message {
+            margin-top: 25px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--brand-purple);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: white;
-            text-shadow: 0 0 20px rgba(147, 51, 234, 0.6);
+            letter-spacing: 2px;
+            text-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+            animation: pulseText 2s infinite ease-in-out;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            background: rgba(147, 51, 234, 0.1);
+            border-radius: 12px;
+            padding: 20px;
         }
 
-        .sub-status {
-            display: block;
-            margin-top: 8px;
-            font-size: 0.75rem;
-            color: var(--brand-purple-light);
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 3px;
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.8; transform: scale(1); box-shadow: 0 0 20px rgba(147, 51, 234, 0.1); }
+            50% { opacity: 1; transform: scale(1.02); box-shadow: 0 0 40px rgba(147, 51, 234, 0.3); }
         }
 
-        /* --- FOOTER --- */
         .footer {
-            margin-top: 45px;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.3);
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
             line-height: 1.6;
+            font-weight: 300;
             font-family: 'Inter', sans-serif;
-            transform: translateZ(20px);
         }
 
         /* --- SNOW --- */
@@ -268,17 +210,21 @@
         }
 
         @keyframes snowfall {
-            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
-            20% { opacity: 0.8; }
-            100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
+            0% { opacity: 0; transform: translateY(0); }
+            20% { opacity: 0.7; }
+            100% { opacity: 0; transform: translateY(100vh); }
         }
 
-        /* --- RESPONSIVE --- */
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            .logo { font-size: 4rem; }
+            .live-message { font-size: 3rem; }
+        }
+        
         @media (max-width: 768px) {
-            .logo { font-size: 2.8rem; }
-            .container { padding: 40px 20px; width: 90%; }
-            .status-text { font-size: 1.4rem; }
-            .bg-cinematic { animation: none; } /* Save battery on mobile */
+             .logo { font-size: 2.8rem; }
+             .container { padding: 30px 20px; }
+             .live-message { font-size: 1.8rem; padding: 15px; }
         }
     </style>
 </head>
@@ -288,56 +234,46 @@
     <div class="bg-overlay"></div>
     <div class="ambient-glow"></div>
 
-    <div class="card-wrapper">
-        <div class="container" id="tiltCard">
-            
-            <div class="depth-layer">
-                <div class="logo">
-                    <span class="talent">talent</span><span class="ido">iDO</span>
-                </div>
-                
-                <div class="tagline">
-                    Mir forme d Zuekunft vo junge Fuessball-Talänt i de Schwiiz
-                </div>
+    <div class="container">
+        <div class="logo">
+            <span class="talent">talent</span><span class="ido">iDO</span>
+        </div>
+        
+        <div class="tagline">
+            Mir forme d Zuekunft vo junge Fuessball-Talänt i de Schwiiz
+        </div>
 
-                <div class="divider"></div>
+        <div class="divider"></div>
 
-                <div class="launch-info">
-                    <span style="font-size: 1.2em">🎄</span> 25. Dezämber
-                </div>
+        <div class="launch">
+            <span>🎄</span> Start am Wiehnachte
+        </div>
 
-                <div class="live-status-container">
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <span class="live-indicator"></span>
-                        <span class="status-text">GOING LIVE SOON</span>
-                    </div>
-                    <span class="sub-status">SYSTEM PREPARING • ZÜRICH</span>
-                </div>
+        <div class="live-message">
+            GOING LIVE SOON
+        </div>
 
-                <div class="footer">
-                    © TalentiDO · Wiehnachts-Edition 🎁⚽<br>
-                    Für di nöchste Champions vo morn
-                </div>
-            </div>
-
+        <div class="footer">
+            © TalentiDO · Wiehnachts-Edition 🎁⚽<br>
+            Für di nöchste Champions vo morn
         </div>
     </div>
 
     <script>
-        // 1. ADVANCED SNOW SYSTEM
+        // SNOW
         function createSnow() {
             const snowContainer = document.body;
-            const flakes = 60; 
+            const flakes = 50; 
 
             for (let i = 0; i < flakes; i++) {
                 const snow = document.createElement("div");
                 snow.className = "snowflake";
-                snow.innerHTML = Math.random() > 0.5 ? "❄" : "·"; // Mix of flakes and dots
+                snow.innerHTML = "❄";
                 
                 snow.style.left = Math.random() * 100 + "vw";
-                const size = Math.random() * 12 + 4;
+                const size = Math.random() * 10 + 5;
                 snow.style.fontSize = size + "px";
-                snow.style.filter = `blur(${Math.random() * 2}px)`;
+                snow.style.filter = `blur(${Math.random()}px)`;
                 
                 const duration = Math.random() * 5 + 5 + "s";
                 const delay = Math.random() * 5 + "s";
@@ -350,30 +286,7 @@
         }
         createSnow();
 
-        // 2. 3D TILT EFFECT (Desktop Only)
-        const card = document.getElementById("tiltCard");
-        const wrapper = document.querySelector(".card-wrapper");
-
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            document.addEventListener("mousemove", (e) => {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                
-                // Rotate the card based on mouse position
-                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
-
-            // Reset when mouse leaves
-            document.addEventListener("mouseleave", () => {
-                card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-                card.style.transition = "transform 0.5s ease";
-            });
-            
-            // Remove transition during movement for smoothness
-            document.addEventListener("mouseenter", () => {
-                card.style.transition = "none";
-            });
-        }
+        // TIMER REMOVED AS REQUESTED
     </script>
 </body>
 </html>
