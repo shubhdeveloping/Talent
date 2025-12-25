@@ -700,8 +700,8 @@
     <div class="relative z-10 max-w-lg mx-auto pt-28 pb-12 px-6">
         <div class="liquid-card p-8 rounded-2xl">
             <h2 class="text-2xl font-display font-bold text-white mb-6">Get in Touch</h2>
-            <form action="https://formsubmit.co/coo@talentido.com" method="POST" class="space-y-4">
-                
+            
+            <form id="contactForm" action="https://formsubmit.co/coo@talentido.com" method="POST" class="space-y-4">
                 <div>
                     <label class="block text-xs uppercase text-gray-400 mb-1 tracking-widest">Name</label>
                     <input type="text" name="name" required class="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-brand-accent focus:outline-none transition">
@@ -719,9 +719,18 @@
 
                 <input type="hidden" name="_subject" value="New Inquiry from TalentiDO Landing Page">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
 
                 <button type="submit" class="w-full btn-neon py-3 rounded-lg font-bold uppercase tracking-widest mt-4 hover:shadow-lg transition-transform active:scale-95">Send Message</button>
             </form>
+
+            <div id="contactSuccess" class="hidden text-center py-8">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-16 h-16 text-green-500 mx-auto mb-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-green-400 font-bold text-xl uppercase tracking-widest">Message Sent</p>
+                <p class="text-gray-400 text-sm mt-2">We'll get back to you soon.</p>
+            </div>
         </div>
     </div>
 </div>
@@ -734,9 +743,15 @@
     </div>
   </div>
 
-  <div class="hidden md:flex gap-8 text-xs font-semibold text-gray-300 uppercase tracking-widest">
+  <div class="hidden md:flex gap-8 text-xs font-semibold text-gray-300 uppercase tracking-widest items-center">
     <a href="#offer" class="hover:text-brand-accent transition-colors">The Offer</a>
     <a href="#benefits" class="hover:text-brand-accent transition-colors">Why TalentiDO</a>
+    
+    <div class="flex gap-4 border-l border-white/20 pl-6 ml-2">
+        <a href="https://www.talentido.ch" class="hover:text-brand-accent transition-colors">Deutsch</a>
+        <a href="https://www.talentido.ch/it" class="hover:text-brand-accent transition-colors">Italiano</a>
+        <a href="https://www.talentido.ch/fr" class="hover:text-brand-accent transition-colors">Français</a>
+    </div>
   </div>
 
   <div class="flex items-center gap-3">
@@ -754,6 +769,13 @@
 <div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-[#05020A] flex flex-col items-center justify-center gap-8 transition-opacity duration-300">
     <a href="#offer" onclick="toggleMenu()" class="text-2xl font-display font-bold text-white hover:text-brand-accent">The Offer</a>
     <a href="#benefits" onclick="toggleMenu()" class="text-2xl font-display font-bold text-white hover:text-brand-accent">Why TalentiDO</a>
+    
+    <div class="flex gap-6 text-xl font-display font-bold">
+        <a href="https://www.talentido.ch" class="text-gray-400 hover:text-white">Deutsch</a>
+        <a href="https://www.talentido.ch/it" class="text-gray-400 hover:text-white">Italiano</a>
+        <a href="https://www.talentido.ch/fr" class="text-gray-400 hover:text-white">Français</a>
+    </div>
+
     <a href="#offer" onclick="toggleMenu()" class="mt-4 px-10 py-3 rounded-full btn-neon font-bold text-lg uppercase">
       Get the Gift
     </a>
@@ -800,7 +822,7 @@
                     
                     <div class="md:col-span-2 p-5 pb-0 md:p-8 flex flex-col items-center justify-center md:items-start text-center md:text-left md:bg-white/5 md:border-r border-white/10">
                          <div class="w-full flex justify-center md:justify-start items-center mb-4 md:mb-6 opacity-50 text-[10px] font-mono tracking-widest uppercase text-white">
-                            <span>TalentiDO 2026</span>
+                           <span>TalentiDO 2026</span>
                         </div>
 
                         <span class="inline-block py-1 px-3 rounded text-[10px] uppercase font-bold tracking-widest text-brand-cyan mb-2 border border-brand-cyan/30 bg-brand-cyan/5">
@@ -986,7 +1008,7 @@
 
     <div class="liquid-card rounded-xl" id="card5">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel5', this)">
-          <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4">
             <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">05</span>
             <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Matches & Exposure</span>
         </div>
@@ -1101,11 +1123,49 @@
         const overlay = document.getElementById('legal-overlay');
         overlay.classList.toggle('hidden');
     }
-    // Added Contact Toggle
     function toggleContact() {
         const overlay = document.getElementById('contact-overlay');
         overlay.classList.toggle('hidden');
     }
+
+    // --- CONTACT FORM AJAX ---
+    // This script intercepts the form submit to show a green message instead of redirecting
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactForm = document.getElementById('contactForm');
+        const successDiv = document.getElementById('contactSuccess');
+        
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Stop redirect
+                
+                const btn = contactForm.querySelector('button');
+                const originalBtnText = btn.innerText;
+                btn.innerText = 'Sending...';
+                
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        contactForm.classList.add('hidden');
+                        successDiv.classList.remove('hidden');
+                    } else {
+                        alert("Oops! Something went wrong. Please try again later.");
+                        btn.innerText = originalBtnText;
+                    }
+                })
+                .catch(error => {
+                    alert("Oops! Something went wrong. Please try again later.");
+                    btn.innerText = originalBtnText;
+                });
+            });
+        }
+    });
+
 
     // --- ACCORDION LOGIC ---
     function toggleAccordion(panelId, button) {
