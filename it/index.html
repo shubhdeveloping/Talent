@@ -28,7 +28,7 @@
               darkest: '#05020A',   
               deep: '#0F0720',      
               accent: '#A855F7',    /* Neon Purple */
-              pink: '#EC4899',      /* Neon Pink */
+              pink: '#9333EA',      /* UPDATED: Changed from Neon Pink (#EC4899) to Purple (#9333EA) */
               cyan: '#06B6D4',      /* Cyber Cyan */
               text: '#F1F5F9',      /* Bright text for readability */
             }
@@ -40,7 +40,8 @@
           },
           backgroundImage: {
             'theme-gradient': 'radial-gradient(circle at 50% 0%, #2E1065 0%, #05020A 80%)',
-            'neon-gradient': 'linear-gradient(135deg, #A855F7 10%, #EC4899 90%)',
+            /* UPDATED: Gradient is now Purple to Deep Purple */
+            'neon-gradient': 'linear-gradient(135deg, #A855F7 10%, #9333EA 90%)',
           },
           animation: {
             'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -165,17 +166,17 @@
         max-width: 100%;
     }
 
-    /* Typography & Gradients */
+    /* Typography & Gradients - UPDATED to remove pink */
     .text-neon-gradient {
-        background: linear-gradient(135deg, #FFFFFF 10%, #A855F7 50%, #EC4899 90%);
+        background: linear-gradient(135deg, #FFFFFF 10%, #A855F7 50%, #9333EA 90%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
     }
     
-    /* Neon Buttons */
+    /* Neon Buttons - UPDATED to remove pink */
     .btn-neon {
-        background: linear-gradient(90deg, #9333EA 0%, #DB2777 100%);
+        background: linear-gradient(90deg, #7C3AED 0%, #9333EA 100%);
         color: white;
         box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
         border: 1px solid rgba(255,255,255,0.1);
@@ -829,7 +830,7 @@
                              Solo 100 Pass
                         </span>
                         <h3 class="text-3xl font-display text-white font-bold mb-1">Football Pass</h3>
-                        <p class="text-gray-400 text-xs mb-2 md:mb-6">Risparmia l'85% Speciale Natale</p>
+                        <p class="text-gray-400 text-xs mb-2 md:mb-6">Risparmia l'85% Holiday Special Offer</p>
 
                         <div class="relative">
                             <div class="text-sm text-gray-500 line-through mb-1 font-mono">CHF 1,000</div>
