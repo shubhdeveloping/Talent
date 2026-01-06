@@ -13,7 +13,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TalentiDO | Wo Talent auf Richtung trifft</title>
-   
+    
   <script src="https://cdn.tailwindcss.com"></script>
 
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
@@ -25,8 +25,8 @@
         extend: {
           colors: {
             brand: {
-              darkest: '#05020A',   
-              deep: '#0F0720',      
+              darkest: '#05020A',    
+              deep: '#0F0720',        
               accent: '#A855F7',    /* Neon Purple */
               pink: '#9333EA',      /* UPDATED: Changed from Neon Pink (#EC4899) to Purple (#9333EA) */
               cyan: '#06B6D4',      /* Cyber Cyan */
@@ -47,6 +47,7 @@
             'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             'scroll': 'scroll 40s linear infinite',
             'float': 'float 6s ease-in-out infinite',
+            'shimmer': 'shimmer 2s linear infinite',
           },
           keyframes: {
             float: {
@@ -56,6 +57,10 @@
             scroll: {
               '0%': { transform: 'translateX(0)' },
               '100%': { transform: 'translateX(-50%)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' }
             }
           }
         }
@@ -173,7 +178,7 @@
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
     }
-     
+      
     /* Neon Buttons - UPDATED to remove pink */
     .btn-neon {
         background: linear-gradient(90deg, #7C3AED 0%, #9333EA 100%);
@@ -211,7 +216,7 @@
       -webkit-backdrop-filter: blur(24px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-     
+      
     /* Tighter section spacing */
     .section-spacing { margin-bottom: 2rem; }
     @media (min-width: 768px) { .section-spacing { margin-bottom: 4rem; } }
@@ -747,7 +752,7 @@
   <div class="hidden md:flex gap-8 text-xs font-semibold text-gray-300 uppercase tracking-widest items-center">
     <a href="#offer" class="hover:text-brand-accent transition-colors">Das Angebot</a>
     <a href="#benefits" class="hover:text-brand-accent transition-colors">Warum TalentiDO</a>
-     
+      
     <div class="flex gap-4 border-l border-white/20 pl-6 ml-2">
         <a href="https://www.talentido.ch/en" class="hover:text-white text-brand-accent transition-colors">English</a>
         <a href="https://www.talentido.ch/it" class="hover:text-brand-accent transition-colors">Italian</a>
@@ -770,7 +775,7 @@
 <div id="mobile-menu" class="fixed inset-0 z-40 hidden bg-[#05020A] flex flex-col items-center justify-center gap-8 transition-opacity duration-300">
     <a href="#offer" onclick="toggleMenu()" class="text-2xl font-display font-bold text-white hover:text-brand-accent">Das Angebot</a>
     <a href="#benefits" onclick="toggleMenu()" class="text-2xl font-display font-bold text-white hover:text-brand-accent">Warum TalentiDO</a>
-     
+      
     <div class="flex gap-6 text-xl font-display font-bold">
         <a href="https://www.talentido.ch/en" class="text-brand-accent hover:text-white">English</a>
         <a href="https://www.talentido.ch/it" class="text-gray-400 hover:text-white">Italian</a>
@@ -805,7 +810,7 @@
       <div class="max-w-xl text-lg md:text-xl text-gray-100 mb-10 leading-relaxed font-sans font-normal">
         Der TalentiDO Football Pass gibt jungen Spielern Struktur, Glauben und Möglichkeiten und Eltern die Gewissheit, dass ihr Kind auf dem richtigen Weg ist.
       </div>
-       
+        
       <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <a href="#offer" class="px-8 py-3.5 rounded-xl btn-neon font-bold text-sm text-center uppercase tracking-wider shadow-lg">Loslegen</a>
       </div>
@@ -820,7 +825,7 @@
             <div class="bg-[#0a0514] rounded-[2.3rem] h-full relative border border-white/5 overflow-hidden">
                  
                 <div class="flex flex-col md:grid md:grid-cols-5 h-full">
-                     
+                      
                     <div class="md:col-span-2 p-5 pb-0 md:p-8 flex flex-col items-center justify-center md:items-start text-center md:text-left md:bg-white/5 md:border-r border-white/10">
                          <div class="w-full flex justify-center md:justify-start items-center mb-4 md:mb-6 opacity-50 text-[10px] font-mono tracking-widest uppercase text-white">
                            <span>TalentiDO 2026</span>
@@ -853,11 +858,34 @@
                         <a href="https://buy.stripe.com/28EfZ9cpG6eGgebf7Wc3m07" class="w-full rounded-xl btn-neon font-bold text-sm py-4 uppercase tracking-widest shadow-lg active:scale-95 transition-transform mt-auto block text-center">
                             Geschenk holen 🎁
                         </a>
-                    </div>
 
+                        <a href="https://go.twint.ch/1/e/tw?tw=acq.BoinSFnaS1OuMSH1FR2lw8UgdfYcRawcda7aMDagiJ9ycjjYiFvH1F9r1DMvN56O" class="group relative w-full mt-3 block overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-blue-500/20 active:scale-95">
+                          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 z-10"></div>
+                          
+                          <div class="relative flex h-full w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-white/10 to-blue-600/20 backdrop-blur-md px-6 py-4 border border-blue-400/30 group-hover:border-blue-400/50 transition-colors">
+                            
+                            <span class="font-display font-bold text-2xl italic tracking-tight text-white drop-shadow-[0_2px_10px_rgba(37,99,235,0.5)]">
+                              TWINT
+                            </span>
+                            
+                            <span class="font-sans text-xs font-semibold uppercase tracking-widest text-blue-100/80 ml-1">
+                              Bezahlen
+                            </span>
+                          </div>
+                        </a>
+                        </div>
                 </div>
             </div>
         </div>
+
+        <div class="mt-6 flex flex-wrap justify-center gap-4 text-[10px] uppercase tracking-widest text-gray-400 font-mono opacity-80">
+            <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> Sichere SSL-Verschlüsselung</span>
+            <span class="hidden md:inline text-white/20">|</span>
+            <span class="flex items-center gap-2">🇨🇭 Schweizer Datenschutz</span>
+             <span class="hidden md:inline text-white/20">|</span>
+            <span class="flex items-center gap-2">⚡ Sofortige Zustellung</span>
+        </div>
+
       </div>
   </div>
 
@@ -930,7 +958,7 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-     
+      
     <div class="liquid-card rounded-xl" id="card1">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel1', this)">
         <div class="flex items-center gap-4">
@@ -1080,6 +1108,21 @@
     </svg>
     Sichere dir jetzt deine Fussball-Zukunft 
   </a>
+
+  <br/>
+  
+  <a href="https://go.twint.ch/1/e/tw?tw=acq.BoinSFnaS1OuMSH1FR2lw8UgdfYcRawcda7aMDagiJ9ycjjYiFvH1F9r1DMvN56O" class="group relative px-12 py-3 rounded-xl inline-flex items-center gap-3 mx-auto transition-transform active:scale-95 mb-4 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-blue-600/20 backdrop-blur-md border border-blue-400/30 rounded-xl transition-colors group-hover:bg-blue-600/30"></div>
+      
+      <div class="relative flex items-center gap-2">
+          <span class="font-display font-bold text-xl italic tracking-tight text-white">TWINT</span>
+          <span class="font-sans text-xs font-bold uppercase tracking-widest text-blue-100">Bezahlen</span>
+      </div>
+  </a>
+  <div class="mb-12 flex flex-col items-center justify-center space-y-1">
+       <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Sichere Zahlung • Digitale Zustellung sofort</p>
+       <p class="text-[10px] text-gray-600 font-mono">AES-256 verschlüsselte Zahlungssicherheit • Schweizer Datenschutzstandards</p>
+  </div>
 
   <div class="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-xs uppercase tracking-widest text-gray-500 border-t border-white/5 pt-8">
        
