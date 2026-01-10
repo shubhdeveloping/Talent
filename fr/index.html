@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth" style="scroll-padding-top: 80px;">
+<html lang="fr" class="scroll-smooth">
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EH2DMMKZD8"></script>
   <script>
@@ -23,25 +23,23 @@
     tailwind.config = {
       theme: {
         extend: {
+          screens: {
+            '3xl': '1800px',
+          },
           colors: {
             brand: {
-              darkest: '#05020A',      
-              deep: '#0F0720',         
+              darkest: '#05020A',       
+              deep: '#0F0720',          
               accent: '#A855F7',    /* Neon Purple */
-              pink: '#9333EA',      /* UPDATED: Changed from Neon Pink (#EC4899) to Purple (#9333EA) */
+              pink: '#9333EA',      
               cyan: '#06B6D4',      /* Cyber Cyan */
-              text: '#F1F5F9',      /* Bright text for readability */
+              text: '#F1F5F9',      /* Bright text */
             }
           },
           fontFamily: {
             display: ['Clash Display', 'sans-serif'],
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          backgroundImage: {
-            'theme-gradient': 'radial-gradient(circle at 50% 0%, #2E1065 0%, #05020A 80%)',
-            /* UPDATED: Gradient is now Purple to Deep Purple */
-            'neon-gradient': 'linear-gradient(135deg, #A855F7 10%, #9333EA 90%)',
           },
           animation: {
             'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -70,57 +68,43 @@
 
   <style>
     body {
-      background: #05020A;
+      background-color: #05020A;
       color: #F1F5F9;
       margin: 0;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* ATMOSPHERE */
-    @media (min-width: 768px) {
-        .atmos-sphere-1 {
-            position: fixed;
-            top: -20%;
-            right: -10%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 60%);
-            filter: blur(80px);
-            z-index: 0;
-            pointer-events: none;
-            will-change: transform;
-        }
-        .atmos-sphere-2 {
-            position: fixed;
-            bottom: -30%;
-            left: -20%;
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 60%);
-            filter: blur(100px);
-            z-index: 0;
-            pointer-events: none;
-            will-change: transform;
-        }
+    /* --- SWISS FOOTBALL ATMOSPHERE (CSS ONLY) --- */
+    .swiss-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background: 
+            /* Fog/Mist bottom - Cyan tint */
+            radial-gradient(circle at 50% 100%, rgba(6, 182, 212, 0.15) 0%, transparent 60%),
+            /* Top Left Floodlight - Purple */
+            radial-gradient(circle at 0% 0%, rgba(147, 51, 234, 0.25) 0%, transparent 50%),
+            /* Top Right Floodlight - Deep Blue */
+            radial-gradient(circle at 100% 0%, rgba(46, 16, 101, 0.5) 0%, transparent 50%),
+            /* Base */
+            linear-gradient(180deg, #05020A 0%, #0F0720 100%);
+        background-size: cover;
     }
 
-    /* SNOWFALL EFFECT */
-    .snowflake {
+    /* Mountain Silhouette */
+    .swiss-mountains {
         position: fixed;
-        top: -20px;
-        color: white;
-        text-shadow: 0 0 5px rgba(255,255,255,0.8);
-        z-index: 9999;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 35vh;
+        background: linear-gradient(to top, #020105 10%, transparent 100%);
+        z-index: -1;
         pointer-events: none;
-        animation-name: fall;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    }
-    @keyframes fall {
-        0% { transform: translateY(-10vh) translateX(0px) rotate(0deg); opacity: 0; }
-        10% { opacity: 0.8; }
-        100% { transform: translateY(110vh) translateX(20px) rotate(360deg); opacity: 0; }
     }
 
     /* Scrollbar */
@@ -130,15 +114,16 @@
 
     /* --- LIQUID GLASS CARD ENGINE --- */
     .liquid-card {
-      background: linear-gradient(160deg, rgba(25, 15, 45, 0.6) 0%, rgba(5, 5, 10, 0.8) 100%);
+      background: linear-gradient(160deg, rgba(20, 10, 40, 0.85) 0%, rgba(5, 5, 10, 0.95) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(168, 85, 247, 0.2);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      z-index: 10;
     }
     .liquid-card::before {
         content: '';
@@ -162,16 +147,17 @@
 
     /* --- HERO COMPACT GLASS PANEL --- */
     .hero-glass-panel {
-        background: rgba(15, 7, 32, 0.4);
-        backdrop-filter: blur(10px);
+        background: rgba(15, 7, 32, 0.5); 
+        backdrop-filter: blur(8px);
         border-radius: 40px 10px 40px 10px;
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.05);
         width: fit-content;
         max-width: 100%;
+        z-index: 10;
     }
 
-    /* Typography & Gradients - UPDATED to remove pink */
+    /* Typography & Gradients */
     .text-neon-gradient {
         background: linear-gradient(135deg, #FFFFFF 10%, #A855F7 50%, #9333EA 90%);
         -webkit-background-clip: text;
@@ -179,17 +165,19 @@
         filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
     }
       
-    /* Neon Buttons - UPDATED to remove pink */
+    /* Neon Buttons - HEAVIER FEEL */
     .btn-neon {
         background: linear-gradient(90deg, #7C3AED 0%, #9333EA 100%);
         color: white;
-        box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+        box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.5), 0 8px 10px -6px rgba(147, 51, 234, 0.1);
         border: 1px solid rgba(255,255,255,0.1);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-bottom: 2px solid rgba(0,0,0,0.2);
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
         will-change: transform;
     }
     .btn-neon:active {
-        transform: scale(0.98);
+        transform: scale(0.98) translateY(1px);
+        box-shadow: 0 5px 15px -5px rgba(147, 51, 234, 0.4);
     }
 
     /* Accordion styles */
@@ -217,19 +205,16 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
       
-    /* Tighter section spacing */
+    /* Spacing Utilities */
     .section-spacing { margin-bottom: 2rem; }
     @media (min-width: 768px) { .section-spacing { margin-bottom: 4rem; } }
   </style>
 </head>
 
-<body class="relative min-h-screen flex flex-col bg-theme-gradient">
+<body class="relative min-h-screen flex flex-col">
 
-<div id="snow-container"></div>
-
-<div class="atmos-sphere-1"></div>
-<div class="atmos-sphere-2"></div>
-
+<div class="swiss-bg"></div>
+<div class="swiss-mountains"></div>
 
 <div id="privacy-overlay" class="fixed inset-0 z-[100] bg-[#05020A] hidden overflow-y-auto transform transition-opacity duration-200">
     <div class="fixed top-0 left-0 w-full h-16 bg-[#05020A]/90 backdrop-blur-md border-b border-white/10 z-50 flex items-center justify-between px-6">
@@ -740,7 +725,7 @@
         </div>
     </div>
 </div>
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl h-16 glass-nav rounded-full flex items-center justify-between px-6 z-50 shadow-2xl">
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[90rem] h-16 glass-nav rounded-full flex items-center justify-between px-6 z-50 shadow-2xl">
   <div class="flex items-center gap-2">
     <div class="flex items-center font-display font-bold">
         <span class="text-xl text-white">talent</span>
@@ -762,7 +747,7 @@
 
   <div class="flex items-center gap-3">
       <a href="#offer" class="hidden md:block px-6 py-2 rounded-full btn-neon font-bold text-xs uppercase tracking-wide">
-        Obtenir le cadeau
+        Réserver mon Pass
       </a>
       <button onclick="toggleMenu()" class="md:hidden text-white p-1 focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
@@ -783,7 +768,7 @@
     </div>
 
     <a href="#offer" onclick="toggleMenu()" class="mt-4 px-10 py-3 rounded-full btn-neon font-bold text-lg uppercase">
-      Obtenir le cadeau
+      Réserver mon Pass
     </a>
     <button onclick="toggleMenu()" class="absolute top-6 right-6 text-white/50 hover:text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
@@ -792,81 +777,103 @@
     </button>
 </div>
 
-<section class="min-h-[auto] md:min-h-[95vh] flex flex-col lg:flex-row items-center justify-center px-3 md:px-6 pt-24 md:pt-32 relative z-10 max-w-7xl mx-auto gap-12 lg:gap-20 section-spacing">
+<section class="min-h-[auto] md:min-h-[100vh] flex flex-col lg:flex-row items-center justify-center px-4 md:px-12 pt-24 md:pt-0 relative z-10 max-w-[90rem] mx-auto gap-12 lg:gap-24 section-spacing">
    
-  <div class="flex-1 flex flex-col w-full mx-auto items-center lg:items-start text-center lg:text-left hero-glass-panel p-6 md:p-10">
-      <div class="mb-6 inline-block px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-deep/80 backdrop-blur-sm animate-pulse-slow">
-         <span class="text-brand-accent font-mono text-[10px] tracking-[0.2em] uppercase font-bold drop-shadow-[0_0_5px_#A855F7]">Là où le talent trouve sa direction</span>
+  <div class="flex-1 flex flex-col w-full mx-auto items-center lg:items-start text-center lg:text-left hero-glass-panel p-6 md:p-12 lg:bg-transparent lg:border-none lg:shadow-none lg:backdrop-blur-none">
+      <div class="mb-4 md:mb-6 inline-block px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-deep/80 backdrop-blur-sm animate-pulse-slow">
+         <span class="text-brand-accent font-mono text-[10px] tracking-[0.2em] uppercase font-bold drop-shadow-[0_0_5px_#A855F7]">
+            Tu as déjà le talent. <br class="block sm:hidden"/> Donne-lui une direction.
+         </span>
       </div>
 
-      <h1 class="text-4xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-8 leading-[1] text-white">
-        Transforme ton rêve de football <br/>
-        en une véritable <br/>
+      <h1 class="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-6 leading-tight text-white">
+        Ton parcours footballistique <br class="md:hidden"/> commence par <br class="hidden md:block"/>
         <span class="text-neon-gradient">
-          opportunité
+          une décision intelligente.
         </span>
       </h1>
 
-      <div class="max-w-xl text-lg md:text-xl text-gray-100 mb-10 leading-relaxed font-sans font-normal">
-        Le TalentiDO Football Pass offre aux jeunes joueurs une structure, de la confiance et des opportunités et aux parents la certitude que leur enfant est sur la bonne voie.
+      <div class="max-w-2xl text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-10 leading-relaxed font-sans font-medium">
+        Pour les joueurs qui veulent grandir. Pour les parents qui veulent de la clarté.
+        <br/><br/>
+        <span class="text-gray-300 font-normal">Sache où tu te situes. Sache quoi améliorer. Sache ce qui t'attend.</span>
       </div>
         
       <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <a href="#offer" class="px-8 py-3.5 rounded-xl btn-neon font-bold text-sm text-center uppercase tracking-wider shadow-lg">Commencer</a>
+          <a href="#offer" class="px-8 py-3.5 rounded-xl btn-neon font-bold text-sm text-center uppercase tracking-wider shadow-lg">Réserver mon Pass</a>
       </div>
+      <p class="mt-4 text-xs text-gray-300 font-sans font-medium tracking-wide">Seulement 100 Pass cette saison. Une fois partis, l'inscription ferme.</p>
   </div>
 
   <div class="flex-1 w-full max-w-md lg:w-auto lg:min-w-[550px] lg:max-w-[700px] flex justify-center relative z-10">
       <div id="offer" class="w-full relative group perspective-1000">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-brand-accent/20 blur-[60px] rounded-full pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-brand-accent/10 blur-[80px] rounded-full pointer-events-none"></div>
 
-        <div class="relative liquid-card rounded-[2.5rem] p-1 transform md:rotate-0 transition-all duration-500 hover:scale-[1.02]">
+        <div class="relative liquid-card rounded-[2.5rem] p-1 transform md:rotate-0 transition-all duration-500 hover:scale-[1.01]">
              
             <div class="bg-[#0a0514] rounded-[2.3rem] h-full relative border border-white/5 overflow-hidden">
                  
                 <div class="flex flex-col md:grid md:grid-cols-5 h-full">
                       
-                    <div class="md:col-span-2 p-5 pb-0 md:p-8 flex flex-col items-center justify-center md:items-start text-center md:text-left md:bg-white/5 md:border-r border-white/10">
-                         <div class="w-full flex justify-center md:justify-start items-center mb-4 md:mb-6 opacity-50 text-[10px] font-mono tracking-widest uppercase text-white">
+                    <div class="md:col-span-2 p-4 md:p-8 flex flex-col items-center justify-center md:items-start text-center md:text-left md:bg-white/5 md:border-r border-white/10">
+                         <div class="w-full flex justify-center md:justify-start items-center mb-2 md:mb-6 opacity-50 text-[10px] font-mono tracking-widest uppercase text-white">
                            <span>TalentiDO 2026</span>
                         </div>
 
                         <span class="inline-block py-1 px-3 rounded text-[10px] uppercase font-bold tracking-widest text-brand-cyan mb-2 border border-brand-cyan/30 bg-brand-cyan/5">
                              Seulement 100 Pass
                         </span>
-                        <h3 class="text-3xl font-display text-white font-bold mb-1">Football Pass</h3>
+                        <h3 class="text-2xl md:text-3xl font-display text-white font-bold mb-1 leading-tight">TalentiDO Football Pass</h3>
                         
-                        <p class="text-gray-400 text-xs mb-2 md:mb-6">Offre de lancement limitée - Accès annuel</p>
+                        <p class="text-gray-400 text-xs mb-2 md:mb-6 mt-2">L'avenir footballistique de ton enfant <br class="hidden md:block" /> mérite une structure, pas des suppositions.</p>
 
                         <div class="relative">
                             <div class="text-sm text-gray-500 line-through mb-1 font-mono">CHF 1,000</div>
-                            <div class="text-6xl md:text-6xl lg:text-7xl font-display font-bold text-white tracking-tighter leading-none drop-shadow-lg">
+                            <div class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white tracking-tighter leading-none drop-shadow-[0_0_35px_rgba(168,85,247,0.5)]">
                                 149<span class="text-3xl md:text-4xl text-[#FFD700] font-sans font-bold ml-1 align-top">CHF</span>
+                            </div>
+                            <div class="text-xs text-gray-300 mt-2 md:mt-3 font-light leading-relaxed">
+                                Une décision. Une année complète de clarté.<br>Plus d'impact que tout autre cours de football.<br>Conçu en Suisse. Utilisé par des joueurs sérieux.
                             </div>
                         </div>
                     </div>
 
-                    <div class="md:col-span-3 p-3 pt-4 md:p-8 flex flex-col justify-between h-full bg-[#0a0514]">
-                         <ul class="text-left text-xs text-gray-300 space-y-1.5 md:space-y-3 mb-2 md:mb-6 w-full border-t border-white/10 pt-4 md:border-t-0 md:pt-0">
-                            <li class="flex items-start gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Jusqu'à CHF 100k de Bourses</li>
-                            <li class="flex items-start gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Visibilité prioritaire pour Recruteurs & Clubs</li>
-                            <li class="flex items-start gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Profil de joueur officiel TalentiDO</li>
-                            <li class="flex items-start gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Parcours de développement annuel</li>
-                            <li class="flex items-start gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Feedback & Suivi par les entraîneurs</li>
-                            <li class="flex items-start gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Accès prioritaire à l'avenir</li>
+                    <div class="md:col-span-3 p-4 md:p-8 flex flex-col justify-between h-full bg-[#0a0514]">
+                         <p class="text-xs text-gray-300 mb-3 font-medium border-t border-white/10 pt-4 md:border-t-0 md:pt-0">Ce que la plupart des joueurs n'obtiennent jamais : Feedback clair. Structure réelle. Visibilité adéquate. Maintenant ils peuvent.</p>
+
+                         <ul class="text-left text-[11px] md:text-xs text-gray-300 space-y-1.5 md:space-y-3 mb-4 md:mb-6 w-full">
+                            <li class="flex items-start gap-2 md:gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Jusqu'à CHF 100k de Bourses</li>
+                            <li class="flex items-start gap-2 md:gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Visibilité prioritaire pour Recruteurs & Clubs</li>
+                            <li class="flex items-start gap-2 md:gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Profil de joueur officiel TalentiDO</li>
+                            <li class="flex items-start gap-2 md:gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Parcours de développement annuel</li>
+                            <li class="flex items-start gap-2 md:gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Feedback & Suivi par les entraîneurs</li>
+                            <li class="flex items-start gap-2 md:gap-3"><span class="text-brand-accent font-bold text-sm">✓</span> Accès prioritaire à l'avenir</li>
                         </ul>
 
-                        <a href="https://buy.stripe.com/28EfZ9cpG6eGgebf7Wc3m07" target="_blank" class="group relative w-full rounded-xl block overflow-hidden transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-purple-500/20 active:scale-95 mt-auto">
+                        <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent shadow-[0_0_10px_rgba(168,85,247,0.5)] mb-4"></div>
+
+                        <a href="https://buy.stripe.com/28EfZ9cpG6eGgebf7Wc3m07" target="_blank" class="group relative w-full rounded-2xl block overflow-hidden transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] mt-auto">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 z-10"></div>
-                            <div class="relative flex h-full w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-white/10 to-purple-600/20 backdrop-blur-md px-6 py-2 md:py-3 border border-purple-400/30 group-hover:border-purple-400/50 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white drop-shadow-md">
+                            <div class="relative flex h-full w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-br from-white/10 to-purple-600/20 backdrop-blur-md px-6 py-4 md:py-5 border border-purple-400/30 group-hover:border-purple-400/50 transition-colors shadow-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white drop-shadow-md flex-shrink-0">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                                 </svg>
-                                <span class="font-display font-bold text-xl italic tracking-wide text-white drop-shadow-[0_2px_10px_rgba(168,85,247,0.5)]">
-                                  Postuler maintenant
+                                <span class="font-display font-bold text-lg md:text-xl italic tracking-wide text-white drop-shadow-[0_2px_10px_rgba(168,85,247,0.5)] text-center">
+                                  Réserver mon Pass
                                 </span>
                             </div>
                         </a>
+                        
+                        <div class="text-[10px] text-center mt-3 text-gray-400 leading-tight">
+                            Accès immédiat • Disponibilité limitée • Pas de liste d'attente
+                        </div>
+                        <div class="text-[10px] text-center mt-1 text-gray-400 leading-tight">
+                            Pas de contrat • Pas de frais cachés • Paiement unique
+                        </div>
+                        <div class="mt-4 text-xs text-gray-200 font-sans font-semibold tracking-wide flex items-center gap-2 justify-center">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                            Une fois les 100 Pass partis, l'inscription ferme pour la saison.
+                        </div>
                         
                         </div>
 
@@ -874,22 +881,12 @@
             </div>
         </div>
 
-        <div class="mt-6 w-full flex flex-col items-center justify-center gap-2 text-[10px] uppercase tracking-widest text-gray-400 font-mono opacity-80 text-center">
-            <div class="flex items-center justify-center gap-2 mb-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-brand-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg> 
-                <span>Cryptage SSL Sécurisé</span>
-            </div>
-            
-            <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 w-full px-2">
-                 <span class="flex items-center gap-1.5 whitespace-nowrap">
-                     <span>🇨🇭</span> Protection des données Suisse
-                 </span>
-                 <span class="flex items-center gap-1.5 whitespace-nowrap">
-                     <span>⚡</span> Livraison Instantanée
-                 </span>
-            </div>
+        <div class="mt-6 flex flex-wrap justify-center gap-4 text-[10px] uppercase tracking-widest text-gray-400 font-mono opacity-80">
+            <span class="flex items-center gap-2">Qualité Suisse.</span>
+            <span class="hidden md:inline text-white/20">|</span>
+            <span class="flex items-center gap-2">Système transparent.</span>
+             <span class="hidden md:inline text-white/20">|</span>
+            <span class="flex items-center gap-2">Le joueur d'abord.</span>
         </div>
 
       </div>
@@ -897,12 +894,11 @@
 
 </section>
 
-<section class="py-6 relative z-20 w-full max-w-7xl mx-auto mb-4">
+<section class="py-6 relative z-20 w-full max-w-[90rem] mx-auto mb-4">
     <div class="text-center mb-8">
         <h2 class="text-2xl md:text-3xl font-display font-bold text-white tracking-wide">ÉCOSYSTÈME DE CONFIANCE</h2>
         <div class="w-16 h-1 bg-brand-accent mx-auto mt-4 rounded-full shadow-[0_0_10px_#A855F7]"></div>
     </div>
-
     <div class="px-6 mb-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div class="liquid-card rounded-2xl p-6 flex flex-col items-center justify-center group">
@@ -951,26 +947,18 @@
 
 <section id="benefits" class="px-6 max-w-7xl mx-auto relative z-10 mb-12">
   <div class="text-center mb-12">
-    <span class="text-brand-cyan font-display text-sm tracking-[0.2em] uppercase mb-4 block font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
-      Valeur Totale : CHF 1,000+
-    </span>
-    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-      Pourquoi les parents suisses font confiance à TalentiDO
-    </h2>
+    <span class="text-brand-cyan font-display text-sm tracking-[0.2em] uppercase mb-4 block font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">Valeur Totale : CHF 1,000+</span>
+    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">Pourquoi les parents suisses font confiance à TalentiDO</h2>
     <div class="max-w-2xl mx-auto text-base space-y-4">
-        <p class="font-medium text-white text-lg">Les parents suisses ne veulent pas de promesses. Ils veulent de la structure, de la sécurité et de l'honnêteté.</p>
+        <p class="font-medium text-white text-lg">La plupart des enfants n'échouent jamais à cause du talent. Ils échouent parce que personne ne leur a donné la direction.</p>
         <p class="font-sans font-normal text-gray-200 leading-relaxed">TalentiDO offre aux jeunes joueurs un parcours footballistique clair et réaliste, sans battage médiatique. Nous aidons les familles à comprendre où se situe leur enfant aujourd'hui, ce qui peut être amélioré et quelles sont les prochaines étapes sans pression.</p>
     </div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-      
     <div class="liquid-card rounded-xl" id="card1">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel1', this)">
-        <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">01</span>
-            <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Bourses & Parcours Joueur</span>
-        </div>
+        <div class="flex items-center gap-4"><span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">01</span><span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Bourses & Parcours Joueur</span></div>
         <span class="text-2xl text-gray-500 accordion-icon transition transform">+</span>
       </button>
       <div id="panel1" class="accordion-content">
@@ -983,13 +971,9 @@
         </ul>
       </div>
     </div>
-
     <div class="liquid-card rounded-xl" id="card2">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel2', this)">
-        <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">02</span>
-            <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Entraînement d'Élite & Compétences</span>
-        </div>
+        <div class="flex items-center gap-4"><span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">02</span><span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Entraînement d'Élite & Compétences</span></div>
         <span class="text-2xl text-gray-500 accordion-icon transition transform">+</span>
       </button>
       <div id="panel2" class="accordion-content">
@@ -1002,13 +986,9 @@
         </ul>
       </div>
     </div>
-
     <div class="liquid-card rounded-xl" id="card3">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel3', this)">
-        <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">03</span>
-            <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Mesure de Performance & Évaluation</span>
-        </div>
+        <div class="flex items-center gap-4"><span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">03</span><span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Mesure de Performance & Évaluation</span></div>
         <span class="text-2xl text-gray-500 accordion-icon transition transform">+</span>
       </button>
       <div id="panel3" class="accordion-content">
@@ -1021,13 +1001,9 @@
         </ul>
       </div>
     </div>
-
     <div class="liquid-card rounded-xl" id="card4">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel4', this)">
-          <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">04</span>
-            <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Coaching & Mentorat</span>
-        </div>
+          <div class="flex items-center gap-4"><span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">04</span><span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Coaching & Mentorat</span></div>
         <span class="text-2xl text-gray-500 accordion-icon transition transform">+</span>
       </button>
       <div id="panel4" class="accordion-content">
@@ -1040,13 +1016,9 @@
         </ul>
       </div>
     </div>
-
     <div class="liquid-card rounded-xl" id="card5">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel5', this)">
-          <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">05</span>
-            <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Matchs & Visibilité</span>
-        </div>
+          <div class="flex items-center gap-4"><span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">05</span><span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Matchs & Visibilité</span></div>
         <span class="text-2xl text-gray-500 accordion-icon transition transform">+</span>
       </button>
       <div id="panel5" class="accordion-content">
@@ -1059,13 +1031,9 @@
         </ul>
       </div>
     </div>
-
     <div class="liquid-card rounded-xl" id="card6">
       <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none group" onclick="toggleAccordion('panel6', this)">
-          <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">06</span>
-            <span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Profil, Sécurité & Communication</span>
-        </div>
+          <div class="flex items-center gap-4"><span class="w-8 h-8 rounded bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xs font-bold border border-brand-accent/30">06</span><span class="text-lg font-display font-bold text-white group-hover:text-brand-accent transition-colors">Profil, Sécurité & Communication</span></div>
         <span class="text-2xl text-gray-500 accordion-icon transition transform">+</span>
       </button>
       <div id="panel6" class="accordion-content">
@@ -1078,7 +1046,6 @@
         </ul>
       </div>
     </div>
-
   </div>
 
   <div class="mt-8 text-center">
@@ -1089,47 +1056,21 @@
 </section>
 
 <footer class="pt-12 pb-8 text-center border-t border-white/5 bg-black/40 backdrop-blur-lg">
-   
   <div class="flex items-center justify-center font-display font-bold mb-6">
-      <span class="text-3xl text-white">talent</span>
-      <span class="text-3xl text-brand-accent drop-shadow-[0_0_8px_#A855F7]">iDO</span>
-      <span class="text-2xl ml-2 filter drop-shadow-md">🇨🇭</span>
+      <span class="text-3xl text-white">talent</span><span class="text-3xl text-brand-accent drop-shadow-[0_0_8px_#A855F7]">iDO</span><span class="text-2xl ml-2 filter drop-shadow-md">🇨🇭</span>
   </div>
-   
-  <h2 class="text-4xl md:text-6xl font-display font-bold mb-6 text-white drop-shadow-lg leading-tight">
-    Si tu prends le football au sérieux,<br/>
-    <span class="text-gray-400">c'est ici que tu commences</span>
-  </h2>
-
-  <p class="text-xl md:text-2xl text-white mb-6 max-w-2xl mx-auto leading-relaxed font-display font-medium">
-    Le talent a besoin de direction.<br/>
-    L'effort a besoin de visibilité.<br/>
-    Les rêves ont besoin d'un système.<br/><br/>
-    <span class="text-brand-accent">TalentiDO offre les trois.</span>
-  </p>
-
+  <h2 class="text-4xl md:text-6xl font-display font-bold mb-6 text-white drop-shadow-lg leading-tight">Ne manquez pas d'opportunités.<br/><span class="text-gray-400">Créez-en une.</span></h2>
+  <p class="text-xl md:text-2xl text-white mb-6 max-w-2xl mx-auto leading-relaxed font-display font-medium">Les joueurs sérieux n'attendent pas. C'est ici que la clarté commence.</p>
   <a href="https://buy.stripe.com/28EfZ9cpG6eGgebf7Wc3m07" target="_blank" class="group relative px-12 py-3 rounded-xl inline-flex items-center gap-3 mx-auto transition-transform active:scale-95 mb-4 overflow-hidden shadow-lg hover:shadow-purple-500/20">
       <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-purple-600/20 backdrop-blur-md border border-purple-400/30 rounded-xl transition-colors group-hover:bg-purple-600/30"></div>
-      
-      <div class="relative flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 animate-pulse text-white">
-            <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z" clip-rule="evenodd" />
-          </svg>
-          <span class="font-display font-bold text-xl italic tracking-wide text-white drop-shadow-[0_2px_10px_rgba(168,85,247,0.5)]">Postuler maintenant</span>
-      </div>
+      <div class="relative flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 animate-pulse text-white"><path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z" clip-rule="evenodd" /></svg><span class="font-display font-bold text-xl italic tracking-tight text-white drop-shadow-[0_2px_10px_rgba(168,85,247,0.5)]">Réserver mon Pass</span></div>
   </a>
-  
   <div class="mb-12 flex flex-col items-center justify-center space-y-1">
-       <p class="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Paiement sécurisé • Livraison numérique instantanée</p>
+       <div class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3 text-gray-500"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" /></svg><p class="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Paiement sécurisé • Livraison numérique instantanée</p></div>
        <p class="text-[10px] text-gray-600 font-mono">Sécurité de paiement cryptée AES-256 • Normes suisses de protection des données</p>
   </div>
-
   <div class="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-xs uppercase tracking-widest text-gray-500 border-t border-white/5 pt-8">
-       
-      <div class="text-center md:text-left">
-        <p>© 2025 TalentiDO · Baarerstrasse 141 , 6300 Zug , Switzerland</p>
-      </div>
-
+      <div class="text-center md:text-left"><p>© 2026 TalentiDO · Baarerstrasse 141 , 6300 Zug , Switzerland</p></div>
       <div class="flex flex-wrap justify-center gap-4 md:gap-6 items-center">
           <button onclick="toggleTerms()" class="hover:text-white transition">CGV</button>
           <button onclick="togglePrivacy()" class="hover:text-white transition">Confidentialité</button>
@@ -1137,79 +1078,22 @@
           <a href="https://www.talentido.com" target="_blank" class="text-brand-accent hover:text-white transition">NFTs</a>
           <button onclick="toggleContact()" class="hover:text-white transition font-bold border border-brand-accent/30 px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm text-brand-accent">Contact</button>
       </div>
-
       <div class="flex gap-4 text-gray-400 mt-4 md:mt-0 justify-center">
         <a href="https://www.tiktok.com/@talentido_" target="_blank" class="hover:text-brand-accent transition transform hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
         <a href="https://x.com/TalentIDO_" target="_blank" class="hover:text-brand-accent transition transform hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
         <a href="https://www.linkedin.com/company/talentido/" target="_blank" class="hover:text-brand-accent transition transform hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path></svg></a>
-        <a href="https://www.instagram.com/talentido_" target="_blank" class="hover:text-brand-accent transition transform hover:scale-110">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM16.999 6a1.001 1.001 0 1 1 0 2.002 1.001 1.001 0 0 1 0-2.002Z"/></svg>
-        </a>
+        <a href="https://www.instagram.com/talentido_" target="_blank" class="hover:text-brand-accent transition transform hover:scale-110"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM16.999 6a1.001 1.001 0 1 1 0 2.002 1.001 1.001 0 0 1 0-2.002Z"/></svg></a>
       </div>
   </div>
 </footer>
 
 <script>
-    // --- UI TOGGLES ---
-    function toggleMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-    }
-    function togglePrivacy() {
-        const overlay = document.getElementById('privacy-overlay');
-        overlay.classList.toggle('hidden');
-    }
-    function toggleTerms() {
-        const overlay = document.getElementById('terms-overlay');
-        overlay.classList.toggle('hidden');
-    }
-    function toggleLegal() {
-        const overlay = document.getElementById('legal-overlay');
-        overlay.classList.toggle('hidden');
-    }
-    function toggleContact() {
-        const overlay = document.getElementById('contact-overlay');
-        overlay.classList.toggle('hidden');
-    }
-
-    // --- CONTACT FORM AJAX ---
-    // This script intercepts the form submit to show a green message instead of redirecting
-    document.addEventListener('DOMContentLoaded', () => {
-        const contactForm = document.getElementById('contactForm');
-        const successDiv = document.getElementById('contactSuccess');
-         
-        if(contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Stop redirect
-                 
-                const btn = contactForm.querySelector('button');
-                const originalBtnText = btn.innerText;
-                btn.innerText = 'Envoi en cours...';
-                 
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        contactForm.classList.add('hidden');
-                        successDiv.classList.remove('hidden');
-                    } else {
-                        alert("Oups ! Une erreur s'est produite. Veuillez réessayer plus tard.");
-                        btn.innerText = originalBtnText;
-                    }
-                })
-                .catch(error => {
-                    alert("Oups ! Une erreur s'est produite. Veuillez réessayer plus tard.");
-                    btn.innerText = originalBtnText;
-                });
-            });
-        }
-    });
-
+    // --- UI TOGGLES & INTERACTIVITY ---
+    function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+    function togglePrivacy() { document.getElementById('privacy-overlay').classList.toggle('hidden'); }
+    function toggleTerms() { document.getElementById('terms-overlay').classList.toggle('hidden'); }
+    function toggleLegal() { document.getElementById('legal-overlay').classList.toggle('hidden'); }
+    function toggleContact() { document.getElementById('contact-overlay').classList.toggle('hidden'); }
 
     // --- ACCORDION LOGIC ---
     function toggleAccordion(panelId, button) {
@@ -1217,22 +1101,15 @@
         const panelEl = document.getElementById(panelId);
         const isActive = panelEl.classList.contains('active');
 
-        // Logic for Desktop: Paired expansion
         if (isDesktop) {
-            const pairs = {
-                'panel1': 'panel2', 'panel2': 'panel1',
-                'panel3': 'panel4', 'panel4': 'panel3',
-                'panel5': 'panel6', 'panel6': 'panel5'
-            };
+            const pairs = { 'panel1': 'panel2', 'panel2': 'panel1', 'panel3': 'panel4', 'panel4': 'panel3', 'panel5': 'panel6', 'panel6': 'panel5' };
             const partnerId = pairs[panelId];
             const partnerEl = document.getElementById(partnerId);
 
-            // Close all others first to keep view clean
             document.querySelectorAll('.accordion-content').forEach(el => {
                 if(el.id !== panelId && el.id !== partnerId) {
                     el.classList.remove('active');
                     el.style.maxHeight = null;
-                    // Reset icon rotation for non-active
                     const btn = el.previousElementSibling; 
                     const icon = btn.querySelector('.accordion-icon');
                     if(icon) icon.classList.remove('rotate-45');
@@ -1240,12 +1117,9 @@
             });
 
             if (!isActive) {
-                // Open Current
                 panelEl.classList.add('active');
                 panelEl.style.maxHeight = panelEl.scrollHeight + "px";
                 button.querySelector('.accordion-icon').classList.add('rotate-45');
-
-                // Open Partner
                 if(partnerEl) {
                     partnerEl.classList.add('active');
                     partnerEl.style.maxHeight = partnerEl.scrollHeight + "px";
@@ -1254,11 +1128,9 @@
                     if(partnerIcon) partnerIcon.classList.add('rotate-45');
                 }
             } else {
-                // Close Both
                 panelEl.classList.remove('active');
                 panelEl.style.maxHeight = null;
                 button.querySelector('.accordion-icon').classList.remove('rotate-45');
-
                 if(partnerEl) {
                     partnerEl.classList.remove('active');
                     partnerEl.style.maxHeight = null;
@@ -1267,10 +1139,7 @@
                     if(partnerIcon) partnerIcon.classList.remove('rotate-45');
                 }
             }
-
         } else {
-            // Logic for Mobile: Standard single toggle
-            // Close others
             document.querySelectorAll('.accordion-content').forEach(el => {
                 el.classList.remove('active');
                 el.style.maxHeight = null;
@@ -1278,7 +1147,6 @@
             document.querySelectorAll('.accordion-icon').forEach(el => {
                 el.classList.remove('rotate-45');
             });
-
             if (!isActive) {
                 panelEl.classList.add('active');
                 panelEl.style.maxHeight = panelEl.scrollHeight + "px";
@@ -1287,32 +1155,6 @@
             }
         }
     }
-
-    // --- SNOWFALL ENGINE ---
-    document.addEventListener('DOMContentLoaded', () => {
-        const snowContainer = document.getElementById('snow-container');
-        const flakeCount = 50; 
-        const symbols = ['❄', '❅', '❆', '•'];
-
-        for(let i=0; i<flakeCount; i++) {
-            const flake = document.createElement('div');
-            flake.classList.add('snowflake');
-            flake.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-             
-            // Random positioning
-            flake.style.left = Math.random() * 100 + 'vw';
-            flake.style.opacity = Math.random() * 0.5 + 0.3;
-            flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-             
-            // Random animation
-            const duration = Math.random() * 5 + 5; // between 5s and 10s
-            flake.style.animationDuration = duration + 's';
-            flake.style.animationDelay = (Math.random() * 5) + 's';
-             
-            snowContainer.appendChild(flake);
-        }
-    });
 </script>
-
 </body>
 </html>
